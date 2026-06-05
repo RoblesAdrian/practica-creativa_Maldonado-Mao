@@ -1,5 +1,0 @@
-{
-  "bundles": [
-    {"name":"org.glassfish.jersey.server.internal.localization"}
-  ]
-}

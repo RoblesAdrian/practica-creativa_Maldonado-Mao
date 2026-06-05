@@ -1,5 +1,0 @@
-{
-  "bundles": [
-    {"name":"org.glassfish.jersey.inject.hk2.localization"}
-  ]
-}

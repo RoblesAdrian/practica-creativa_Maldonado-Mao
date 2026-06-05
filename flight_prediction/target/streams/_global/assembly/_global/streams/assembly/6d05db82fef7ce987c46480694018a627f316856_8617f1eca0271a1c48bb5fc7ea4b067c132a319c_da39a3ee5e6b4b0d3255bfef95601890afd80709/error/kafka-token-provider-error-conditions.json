@@ -1,8 +1,0 @@
-{
-  "MISSING_KAFKA_OPTION" : {
-    "message" : [
-      "Kafka option <option> is not set. Please make sure it is set and retry."
-    ],
-    "sqlState" : "42KDF"
-  }
-}

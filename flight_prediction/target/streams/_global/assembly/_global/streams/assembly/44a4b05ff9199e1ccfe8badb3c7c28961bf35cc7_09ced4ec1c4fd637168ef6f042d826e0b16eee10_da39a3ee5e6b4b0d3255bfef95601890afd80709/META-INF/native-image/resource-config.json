@@ -1,7 +1,0 @@
-{
-  "resources":{
-  "includes":[{
-    "pattern":"\\QMETA-INF/services/com.mongodb.spi.dns.InetAddressResolverProvider\\E"
-  }]},
-  "bundles":[]
-}
