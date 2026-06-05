@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: airflow-webserver
+  namespace: practica-creativa
+spec:
+  selector:
+    app: airflow-webserver
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airflow-webserver
+  namespace: practica-creativa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: airflow-webserver
+  template:
+    metadata:
+      labels:
+        app: airflow-webserver
+    spec:
+      volumes:
+        - name: dags
+          configMap:
+            name: airflow-dags
+      containers:
+        - name: airflow-webserver
+          image: airflow-lakehouse:2.10.4
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: airflow-config
+          volumeMounts:
+            - name: dags
+              mountPath: /opt/airflow/dags
+          env:
+            - name: AIRFLOW__CORE__FERNET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: airflow-secret
+                  key: fernet-key
+          ports:
+            - containerPort: 8080
+          command: ["/bin/bash", "-lc"]
+          args:
+            - |
+              airflow webserver

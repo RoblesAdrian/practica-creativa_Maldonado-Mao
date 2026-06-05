@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: airflow-init
+  namespace: practica-creativa
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: airflow-init
+          image: airflow-lakehouse:2.10.4
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: airflow-config
+          env:
+            - name: AIRFLOW__CORE__FERNET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: airflow-secret
+                  key: fernet-key
+          command: ["/bin/bash", "-lc"]
+          args:
+            - |
+              airflow db migrate
+              airflow users create \
+                --username admin \
+                --password admin \
+                --firstname Admin \
+                --lastname User \
+                --role Admin \
+                --email admin@example.com || true

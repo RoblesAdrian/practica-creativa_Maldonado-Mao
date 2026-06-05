@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airflow-scheduler
+  namespace: practica-creativa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: airflow-scheduler
+  template:
+    metadata:
+      labels:
+        app: airflow-scheduler
+    spec:
+      volumes:
+        - name: dags
+          configMap:
+            name: airflow-dags
+      containers:
+        - name: airflow-scheduler
+          image: airflow-lakehouse:2.10.4
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: dags
+              mountPath: /opt/airflow/dags
+          envFrom:
+            - configMapRef:
+                name: airflow-config
+          env:
+            - name: AIRFLOW__CORE__FERNET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: airflow-secret
+                  key: fernet-key
+          command: ["/bin/bash", "-lc"]
+          args:
+            - |
+              airflow scheduler
