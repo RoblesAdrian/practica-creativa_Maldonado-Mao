@@ -1,368 +1,303 @@
-# Agile_Data_Code_2
+# Practica Creativa Lakehouse
 
-Code for [Agile Data Science 2.0](http://shop.oreilly.com/product/0636920051619.do), O'Reilly 2017. Now available at the [O'Reilly Store](http://shop.oreilly.com/product/0636920051619.do), on [Amazon](https://www.amazon.com/Agile-Data-Science-2-0-Applications/dp/1491960116) (in Paperback and Kindle) and on [O'Reilly Safari](https://www.safaribooksonline.com/library/view/agile-data-science/9781491960103/). Also available anywhere technical books are sold!
+This project is a local lakehouse-style environment for training and running Spark jobs with Kafka, Cassandra, MinIO, Iceberg, Airflow, MLflow, and a small web app. It also includes a minimal Prometheus + Grafana monitoring setup for host and container metrics [web:528][web:471].
 
-This is also the code for the [Realtime Predictive Analytics](http://datasyndrome.com/video) video course and [Introduction to PySpark](http://datasyndrome.com/training) live course!
+## What this project contains
 
-Have problems? Please file an issue!
+- Spark standalone cluster and Spark submit runtime.
+- Kafka broker plus init script.
+- Cassandra plus init script.
+- MinIO plus bucket bootstrap.
+- Iceberg REST catalog.
+- Airflow webserver, scheduler, and init bootstrap.
+- MLflow tracking server.
+- A FastAPI spark runner service used by Airflow.
+- A Flask web app.
+- Prometheus + Grafana monitoring. [web:528][web:530]
 
+## Requirements
 
-## Realtime Predictive Analytics Course
+- Docker and Docker Compose.
+- Git.
+- Java and SBT for the Scala Spark project build.
+- Enough disk space for the Docker images and generated artifacts. [web:529][web:532]
 
-There is now a video course using code from chapter 8, [Realtime Predictive Analytics with Kafka, PySpark, Spark MLlib and Spark Streaming](http://datasyndrome.com/video). Check it out now at [datasyndrome.com/video](http://datasyndrome.com/video).
+## Clone the repository
 
-A free preview of the course is available at [https://vimeo.com/202336113](https://vimeo.com/202336113)
-
-[<img src="images/video_course_cover.png">](http://datasyndrome.com/video)
-
-# The Data Value Pyramid
-
-Originally by Pete Warden, the data value pyramid is how the book is organized and structured. We climb it as we go forward each chapter.
-
-![Data Value Pyramid](images/climbing_the_pyramid_chapter_intro.png)
-
-# System Architecture
-
-The following diagrams are pulled from the book, and express the basic concepts in the system architecture. The front and back end architectures work together to make a complete predictive system.
-
-## Front End Architecture
-
-This diagram shows how the front end architecture works in our flight delay prediction application. The user fills out a form with some basic information in a form on a web page, which is submitted to the server. The server fills out some neccesary fields derived from those in the form like "day of year" and emits a Kafka message containing a prediction request. Spark Streaming is listening on a Kafka queue for these requests, and makes the prediction, storing the result in MongoDB. Meanwhile, the client has received a UUID in the form's response, and has been polling another endpoint every second. Once the data is available in Mongo, the client's next request picks it up. Finally, the client displays the result of the prediction to the user! 
-
-This setup is extremely fun to setup, operate and watch. Check out chapters 7 and 8 for more information!
-
-![Front End Architecture](images/front_end_realtime_architecture.png)
-
-## Back End Architecture
-
-The back end architecture diagram shows how we train a classifier model using historical data (all flights from 2015) on disk (HDFS or Amazon S3, etc.) to predict flight delays in batch in Spark. We save the model to disk when it is ready. Next, we launch a Kafka queue. We use Spark Streaming to load the classifier model, and then listen for prediction requests in a Kafka queue. When a prediction request arrives, Spark Streaming makes the prediction, storing the result in MongoDB where the web application can pick it up.
-
-This architecture is extremely powerful, and it is a huge benefit that we get to use the same code in batch and in realtime with PySpark Streaming.
-
-![Backend Architecture](images/back_end_realtime_architecture.png)
-
-# Screenshots
-
-Below are some examples of parts of the application we build in this book and in this repo. Check out the book for more!
-
-## Airline Entity Page
-
-Each airline gets its own entity page, complete with a summary of its fleet and a description pulled from Wikipedia.
-
-![Airline Page](images/airline_page_enriched_wikipedia.png)
-
-## Airplane Fleet Page
-
-We demonstrate summarizing an entity with an airplane fleet page which describes the entire fleet.
-
-![Airplane Fleet Page](images/airplanes_page_chart_v1_v2.png)
-
-## Flight Delay Prediction UI
-
-We create an entire realtime predictive system with a web front-end to submit prediction requests.
-
-![Predicting Flight Delays UI](images/predicting_flight_kafka_waiting.png)
-
-## Downloading Data
-
-Once the server comes up, download the data and you are ready to go. First change directory into the `practica_creativa` directory.
-
-```
+```bash
+git clone https://github.com/RoblesAdrian/practica-creativa_Maldonado-Mao.git
 cd practica_creativa
 ```
-Now download the data.
 
-For the [Realtime Predictive Analytics](http://datasyndrome.com/video)  run: 
+## Recreate the omitted large files
 
-```
-resources/download_data.sh
-```
-## Installation
+Some files are build artifacts and should be recreated locally after cloning. Build artifacts are commonly kept out of Git because they bloat the repository and are often regenerated from source [web:523][web:526].
 
-You need to install each component included in the architecture. 
-The following list includes some links with the installation procedure for each component:
+### 1) Recreate the Spark assembly JAR
 
- - [Intellij](https://www.jetbrains.com/help/idea/installation-guide.html) (jdk 17) or VsCode
- - [Pyhton3](https://realpython.com/installing-python/) (Suggested version 3.7) 
- - [PIP](https://pip.pypa.io/en/stable/installing/)
- - [SDKMAN](https://sdkman.io/install/)
- - [SBT](https://www.scala-sbt.org/release/docs/Setup.html) 
- - [MongoDB](https://docs.mongodb.com/manual/installation/) (Suggested version 7.0.17, if it fails try with mongo 4.0)
-   In the ETSIT labs mongo is alrady installed
-   
-   Although you can install it directly with docker:
-   ```
-   $ docker run --name mongo -d -p 27017:27017 mongo:7.0.17 #or mongo:4.0 if mongo 6.0 fails
-   ```
- - [Spark](https://spark.apache.org/docs/latest/) (Mandatory version 4.1.1 -> you can install it with sdkman)
- - [Scala](https://www.scala-lang.org)(Mandatory version 2.13.0 -> you can install it with sdkman)
- - [Kafka](https://kafka.apache.org/quickstart) (Mandatory version kafka_2.13_4.2.0 with KRaft)
+This project expects:
 
- ### Create and use Python venv
-
- ```
- python3 -m venv env
- source env/bin/activate
-
- ```
- 
- ### Install python libraries
- 
- ```
-  pip install -r requirements.txt
- ```
- ### Check Java installation
- 
- Open a console and use sdk man to check the installation of java:
- 
- ```
-   sdk list java
- ```
- In case you have other version installed, chage or instal de jdk 17
- ```
-   sdk install java 17.0.14-amzn
- ```
- Check the JAVA_HOME env:
- ```
-   echo ${JAVA_HOME}
- ```
- You should have an output similar to this:
- ```
-   /Users/admin/.sdkman/candidates/java/current
- ```
-
-  ### Start Kafka
-  
-  Open a console and go to the downloaded Kafka directory and run:
-  ```
-    KAFKA_CLUSTER_ID="$(bin/kafka-storage.sh random-uuid)"
-  ```
-  ```
-    bin/kafka-storage.sh format -t $KAFKA_CLUSTER_ID -c config/kraft/server.properties  
-  ```
-  
-  ```
-    bin/kafka-server-start.sh config/kraft/server.properties
-   ```
-   open a new console in the same directory and create a new topic :
-  ```
-      bin/kafka-topics.sh \
-        --create \
-        --bootstrap-server localhost:9092 \
-        --replication-factor 1 \
-        --partitions 1 \
-        --topic flight-delay-ml-request
-   ```
-   You should see the following message:
-  ```
-    Created topic "flight-delay-ml-request".
-  ```
-  You can see the topic we created with the list topics command:
-  ```
-      bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
-  ```
-  Output:
-  ```
-    flight-delay-ml-request
-  ```
-  (Optional) You can oen a new console with a consumer in order to see the messeges sent to that topic
-  ```
-  bin/kafka-console-consumer.sh \
-      --bootstrap-server localhost:9092 \
-      --topic flight-delay-ml-request \
-      --from-beginning
-  ```
-  ## Import the distance records to MongoDB
-  Check if you have Mongo up and running:
-  ```
-  service mongod status # if installed directly
-  docker ps # if installed with docker
-  docker logs mongo # if installed with docker but docker ps does not show mongo
-  ```
-  Output (if installed directly):
-  ```
-  mongod.service - MongoDB Database Server
-     Loaded: loaded (/lib/systemd/system/mongod.service; disabled; vendor preset: 
-     Active: active (running) since Tue 2019-10-01 14:58:53 CEST; 2h 11min ago
-       Docs: https://docs.mongodb.org/manual
-   Main PID: 7816 (mongod)
-     CGroup: /system.slice/mongod.service
-             └─7816 /usr/bin/mongod --config /etc/mongod.conf
-  
-  oct 01 14:58:53 amunoz systemd[1]: Started MongoDB Database Server.
-  ```
-  > [!NOTE]  
-  >In case you don't have run mongo with docker and is the first time you install monog or your are using the laboratory perform the following steps:
-  >Create a data directory for storing the mongo data inseide of the `practica_creativa` folder:
-  >```
-  >mkdir data_mongo
-  >```
-  >Open a terminal and run the mongo daemon for starting the server:
-  >```
-  >mongod —port 27017 —dbpath ./data_mongo —oplogSize 50
-  >```
-  >Don't close the terminar in any moment otherwise teh mongo server will stop.
-
-  In other terminal run the import_distances.sh script. If mongo was installed with docker you have to copy the /data downloaded inside the mongo container and check how to import a .jsonl (import_distances.sh)
-  ```
-  ./resources/import_distances.sh
-  ```
-  Output:
-  ```
-  2019-10-01T17:06:46.957+0200	connected to: mongodb://localhost/
-  2019-10-01T17:06:47.035+0200	4696 document(s) imported successfully. 0 document(s) failed to import.
-  MongoDB shell version v4.2.0
-  connecting to: mongodb://127.0.0.1:27017/agile_data_science?compressors=disabled&gssapiServiceName=mongodb
-  Implicit session: session { "id" : UUID("9bda4bb6-5727-4e91-8855-71db2b818232") }
-  MongoDB server version: 7.0.17
-  {
-  	"createdCollectionAutomatically" : false,
-  	"numIndexesBefore" : 1,
-  	"numIndexesAfter" : 2,
-  	"ok" : 1
-  }
-
-  ```
-  ## Train and Save de the model with PySpark mllib
-  In a console go to the base directory of the cloned repo, then go to the `practica_creativa` directory
-  ```
-    cd practica_creativa
-  ```
-  > [!NOTE]  
-  > You only need to set JAVA_HOME if you haven't done before.
-  >Set the `JAVA_HOME` env variable with the path of java installation directory, for example:
-  >```
-  >  export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
-  >```
-  
-  Set the `SPARK_HOME` env variable with the path of your Spark installation folder, for example:
-  ```
-    export SPARK_HOME=/opt/spark
-    # if installed with sdkman you can get the installation folder with 'whereis spark-submit'
-  ```
-  Now, execute the script `train_spark_mllib_model.py`
-  ```
-      python3 resources/train_spark_mllib_model.py .
-  ```
-  As result, some files will be saved in the `models` folder 
-  
-  ```
-  ls ../models
-  
-  ```   
-  ## Run Flight Predictor
-  First, you need to change the base_paht val in the MakePrediction scala class,
-  change that val for the path where you clone repo is placed:
-  ```
-    val base_path= "/home/user/Desktop/practica_creativa"
-    
-  ``` 
-  Then run the code using Intellij, sbt, or spark-submit with their respective arguments. 
-  
-Please, note that in order to use spark-submit you first need to compile the code and build a JAR file using sbt. Also, when running the spark-submit command, you have to add at least these two packages with the --packages option:
-  ```
-  --packages org.mongodb.spark:mongo-spark-connector_2.12:10.4.1,org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.3
-     
-  ``` 
-   Be carefull with the packages version because if you are using another version of spark, kafka or mongo you have to choose the correspondent version to your installation. This packages work with Spark 3.5.3, kafka_2.12-3.9.0 and mongo superior to 6.0
-  
-  ## Start the prediction request Web Application
-  
-  Set the `PROJECT_HOME` env variable with the path of you cloned repository, for example:
-   ```
-  export PROJECT_HOME=/home/user/Desktop/practica_creativa
-   ```
-  Go to the `web` directory under `resources` and execute the flask web application file `predict_flask.py`:
-  ```
-  cd practica_creativa/resources/web
-  python3 predict_flask.py
-  
-  ```
-  Now, visit http://localhost:5000/flights/delays/predict_kafka and, for fun, open the JavaScript console. Enter a nonzero departure delay, an ISO-formatted date (I used 2016-12-25, which was in the future at the time I was writing this), a valid carrier code (use AA or DL if you don’t know one), an origin and destination (my favorite is ATL → SFO), and a valid flight number (e.g., 1519), and hit Submit. Watch the debug output in the JavaScript console as the client polls for data from the response endpoint at /flights/delays/predict/classify_realtime/response/.
-  
-  Quickly switch windows to your Spark console. Within 10 seconds, the length we’ve configured of a minibatch, you should see something like the following:
-  
-  ## Check the predictions records inserted in MongoDB
-  ```
-   $ mongo
-   > use use agile_data_science;
-   > db.flight_delay_ml_response.find();
-  
-  ```
-  You must have a similar output as:
-  
-  ```
-  { "_id" : ObjectId("5d8dcb105e8b5622696d6f2e"), "Origin" : "ATL", "DayOfWeek" : 6, "DayOfYear" : 360, "DayOfMonth" : 25, "Dest" : "SFO", "DepDelay" : 290, "Timestamp" : ISODate("2019-09-27T08:40:48.175Z"), "FlightDate" : ISODate("2016-12-24T23:00:00Z"), "Carrier" : "AA", "UUID" : "8e90da7e-63f5-45f9-8f3d-7d948120e5a2", "Distance" : 2139, "Route" : "ATL-SFO", "Prediction" : 3 }
-  { "_id" : ObjectId("5d8dcba85e8b562d1d0f9cb8"), "Origin" : "ATL", "DayOfWeek" : 6, "DayOfYear" : 360, "DayOfMonth" : 25, "Dest" : "SFO", "DepDelay" : 291, "Timestamp" : ISODate("2019-09-27T08:43:20.222Z"), "FlightDate" : ISODate("2016-12-24T23:00:00Z"), "Carrier" : "AA", "UUID" : "d3e44ea5-d42c-4874-b5f7-e8a62b006176", "Distance" : 2139, "Route" : "ATL-SFO", "Prediction" : 3 }
-  { "_id" : ObjectId("5d8dcbe05e8b562d1d0f9cba"), "Origin" : "ATL", "DayOfWeek" : 6, "DayOfYear" : 360, "DayOfMonth" : 25, "Dest" : "SFO", "DepDelay" : 5, "Timestamp" : ISODate("2019-09-27T08:44:16.432Z"), "FlightDate" : ISODate("2016-12-24T23:00:00Z"), "Carrier" : "AA", "UUID" : "a153dfb1-172d-4232-819c-8f3687af8600", "Distance" : 2139, "Route" : "ATL-SFO", "Prediction" : 1 }
-
-
+```text
+flight_prediction/target/scala-2.13/flight_prediction-assembly-0.1.jar
 ```
 
-### Train the model with Apache Airflow (optional and only for the final submission not the middle one)
+Build it from the Scala project:
 
-- The version of Apache Airflow used is the 2.1.4 and it is installed with pip. For development it uses SQLite as database but it is not recommended for production. For the laboratory SQLite is sufficient.
-
-- Install python libraries for Apache Airflow (suggested Python 3.7)
-
-```shell
-cd resources/airflow
-pip install -r requirements.txt -c constraints.txt
+```bash
+cd flight_prediction
+sbt clean assembly
+cd ..
 ```
-- Set the `PROJECT_HOME` env variable with the path of you cloned repository, for example:
-```
-export PROJECT_HOME=/home/user/Desktop/practica_creativa
-```
-- Configure airflow environment
 
-```shell
-export AIRFLOW_HOME=~/airflow
-mkdir $AIRFLOW_HOME/dags
-mkdir $AIRFLOW_HOME/logs
-mkdir $AIRFLOW_HOME/plugins
+`SBT assembly` creates a fat JAR in the `target/scala-2.13/` tree, which is the normal output for this kind of project [web:529][web:532][web:533].
 
+### 2) Recreate the Spark dependency JARs
+
+This project also expects these jars in `docker/spark-submit/jars/`:
+
+```text
+bundle-2.24.6.jar
+hadoop-aws-3.4.1.jar
+iceberg-spark-runtime-4.0_2.13-1.10.0.jar
+```
+
+If they are not present after cloning, recreate the directory and copy the jars back into place from your local cache or download source:
+
+```bash
+mkdir -p docker/spark-submit/jars
+cp /path/to/bundle-2.24.6.jar docker/spark-submit/jars/
+cp /path/to/hadoop-aws-3.4.1.jar docker/spark-submit/jars/
+cp /path/to/iceberg-spark-runtime-4.0_2.13-1.10.0.jar docker/spark-submit/jars/
+```
+
+If your Dockerfile downloads them during build, you only need the directory to exist before building the image.
+
+## Make scripts executable
+
+```bash
+chmod +x cassandra-init/init.sh
+chmod +x mongo-init/01-import-distances.sh
+chmod +x resources/*.sh
+```
+
+If you use the FastAPI spark runner, also ensure the wrapper script is executable:
+
+```bash
+chmod +x resources/run_train_model.sh
+```
+
+## Build the images
+
+```bash
+docker compose build
+```
+
+If you want a completely fresh rebuild:
+
+```bash
+docker compose build --no-cache
+```
+
+## Start the stack
+
+```bash
+docker compose up -d
+```
+
+For a clean first start, especially after fixing DB or init issues:
+
+```bash
+docker compose down -v
+docker compose up -d
+```
+
+Docker Compose is the right tool here because it lets you define service dependencies and start the whole environment together [web:530][web:528].
+
+## Wait for the init containers
+
+These services should complete before you try to use the stack:
+
+```bash
+docker compose logs -f cassandra-init
+docker compose logs -f mc-init
+docker compose logs -f kafka-init
+docker compose logs -f airflow-init
+```
+
+The Airflow setup relies on the metadata database being initialized before the scheduler/webserver start, and healthchecks are the standard way to make Compose wait for a service to become usable [web:530][web:528][web:440].
+
+## Useful services and URLs
+
+- Airflow: `http://localhost:8085`
+- Spark master UI: `http://localhost:8080`
+- Spark worker 1 UI: `http://localhost:8081`
+- Spark worker 2 UI: `http://localhost:8082`
+- MinIO console: `http://localhost:9001`
+- Iceberg REST: `http://localhost:8181`
+- Kafka: `localhost:9092`
+- Prometheus: `http://localhost:9090`
+- Grafana: `http://localhost:3000`
+- cAdvisor: `http://localhost:8088`
+- node-exporter: `http://localhost:9100` [web:471][web:474]
+
+## Airflow admin user
+
+If the admin user is not created automatically, run:
+
+```bash
+docker exec -it airflow-webserver bash
 airflow users create \
-    --username admin \
-    --firstname Jack \
-    --lastname  Sparrow\
-    --role Admin \
-    --email example@mail.org
+  --username admin \
+  --firstname Admin \
+  --lastname User \
+  --role Admin \
+  --email admin@example.com \
+  --password admin
 ```
-- Start airflow scheduler and webserver
-```shell
-airflow webserver --port 8080
-airflow sheduler
+
+If your `airflow-init` container is healthy, you should normally only need this once.
+
+## Run the Spark jobs manually
+
+### Load data into the lakehouse
+
+```bash
+docker compose run --rm spark-submit-load-train-data
 ```
-Vistit http://localhost:8080/home for the web version of Apache Airflow.
 
-- The DAG is defined in `resources/airflow/setup.py`.
-- **TODO**: add the DAG and execute it to train the model (see the official documentation of Apache Airflow to learn how to exectue and add a DAG with the airflow command).
-- **TODO**: explain the architecture of apache airflow (see the official documentation of Apache Airflow).
-- **TODO**: analyzing the setup.py: what happens if the task fails?, what is the peridocity of the task?
+### Train the model
 
-![Apache Airflow DAG success](images/airflow.jpeg)
+```bash
+docker compose run --rm spark-submit-train
+```
 
+### Run the prediction stream
 
+```bash
+docker compose run --rm spark-submit-predict
+```
 
-## Evaluation
+## Run the Airflow DAG
 
-### First stage
-Evaluation in class where the student/pair hast to show de basic deployment working (only the prediction phase)
+The Airflow DAG triggers the FastAPI spark runner service, which then starts the Spark training job in the background.
 
-### Second stage
+```bash
+docker compose up -d
+```
 
-One member of the pair must upload the compressed code in a .zip file, **WITHOUT the folders models/, flight_prediction/target, and data/**. Inside the zip file, **a PDF must be included indicating the members of the pair and which parts of the assignment have been completed (not how they were done)**. Maximum length: one page.
+Then in Airflow:
+1. Open the UI.
+2. Enable the DAG.
+3. Trigger `train_model_lakehouse_dag`.
 
-Although the submission deadline is January 10th, we recommend finishing it before the written exam, as some questions may be related to the final project. The project will be assessed orally in the following weeks. Time slots will be opened close to the date, and if anyone wishes to do it earlier, they should contact the course coordinator’s email.
+If you want to test the FastAPI endpoint directly from the Airflow container:
 
-Several notes:
+```bash
+docker exec -it airflow-webserver bash
+curl -X POST http://spark-runner:8000/run-train-model
+```
 
-1) The project must work correctly; otherwise, it will be graded with a 0. The same applies to each improvement. If an improvement is incomplete, it will be graded with a 0.
+## Run the spark runner service
 
-2) A minimum grade of 5 out of 10 is required to pass the course.
+If the runner service is part of your Compose setup, start it with:
 
-3) The project and the oral exam can be done in pairs, but the grade will be individual. This means that questions will be asked to both members of the pair, and if they are not answered adequately, the project will not be passed.
+```bash
+docker compose up -d spark-runner
+docker compose logs -f spark-runner
+```
 
+It listens on `POST /run-train-model` and launches the training script for you.
 
+## Monitoring setup
 
+The monitoring stack is intentionally minimal:
 
+- Prometheus scrapes container and host metrics.
+- Grafana visualizes them.
+- cAdvisor exposes Docker container metrics.
+- node-exporter exposes host metrics. [web:471][web:474]
+
+Start it with:
+
+```bash
+docker compose up -d node-exporter cadvisor prometheus grafana
+```
+
+### Good starter Grafana panels
+
+Use these two panels first:
+- CPU usage by container.
+- Memory usage by container.
+
+They are easy to understand and still show whether Spark, Airflow, Kafka, MinIO, or MLflow are actually doing work [web:471][web:489].
+
+## Build and runtime commands
+
+### Inspect running services
+
+```bash
+docker compose ps
+```
+
+### Follow logs
+
+```bash
+docker compose logs -f airflow-webserver
+docker compose logs -f airflow-scheduler
+docker compose logs -f spark-submit-train
+docker compose logs -f mlflow
+```
+
+### Stop everything
+
+```bash
+docker compose down
+```
+
+### Remove volumes too
+
+```bash
+docker compose down -v
+```
+
+## Git ignore rules
+
+Do not commit generated artifacts such as:
+
+```gitignore
+flight_prediction/target/
+docker/spark-submit/jars/
+*.jar
+airflow/logs/
+airflow/dags/__pycache__/
+resources/__pycache__/
+```
+
+Build artifacts and `target/` folders should generally be excluded from Git and recreated locally when needed [web:523][web:526][web:529].
+
+## If GitHub rejects a push
+
+If large binaries were already committed, GitHub will reject the push until they are removed from repository history. In that case, rewrite the history to remove the large files, then force-push the cleaned branch [web:519][web:522][web:525].
+
+## One-command setup summary
+
+After cloning, the typical setup is:
+
+```bash
+git clone https://github.com/RoblesAdrian/practica-creativa_Maldonado-Mao.git
+cd practica_creativa
+mkdir -p docker/spark-submit/jars
+cp /path/to/bundle-2.24.6.jar docker/spark-submit/jars/
+cp /path/to/hadoop-aws-3.4.1.jar docker/spark-submit/jars/
+cp /path/to/iceberg-spark-runtime-4.0_2.13-1.10.0.jar docker/spark-submit/jars/
+cd flight_prediction
+sbt clean assembly
+cd ..
+chmod +x cassandra-init/init.sh mongo-init/01-import-distances.sh resources/*.sh
+docker compose build
+docker compose up -d
+```
+
+## Notes
+
+This repository is designed to be reproducible from source plus a small set of locally rebuilt artifacts. The safest workflow is to keep source files in Git, ignore build outputs, and rebuild the jars and container images after cloning [web:523][web:526][web:529].
