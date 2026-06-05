@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven Bundle Plugin 5.1.9
+Build-Jdk-Spec: 17
+Automatic-Module-Name: org.glassfish.hk2.locator
+Bundle-Description: ServiceLocator Default Implementation
+Bundle-DocURL: http://www.oracle.com
+Bundle-License: http://www.eclipse.org/legal/epl-2.0, https://www.gnu.or
+ g/software/classpath/license.html
+Bundle-ManifestVersion: 2
+Bundle-Name: ServiceLocator Default Implementation
+Bundle-SymbolicName: org.glassfish.hk2.locator
+Bundle-Vendor: Oracle Corporation
+Bundle-Version: 3.0.6
+DynamicImport-Package: *
+Export-Package: org.jvnet.hk2.external.generator;version="3.0.6";uses:="
+ org.glassfish.hk2.api,org.glassfish.hk2.extension",org.jvnet.hk2.extern
+ al.runtime;version="3.0.6";uses:="org.glassfish.hk2.api,org.jvnet.hk2.a
+ nnotations"
+Import-Package: jakarta.inject;version="[2.0,3)",javassist.util.proxy;ve
+ rsion="[3.30,4)",org.aopalliance.intercept;version="[1.0,2)",org.glassf
+ ish.hk2.api;version="[3.0,4)",org.glassfish.hk2.api.messaging;version="
+ [3.0,4)",org.glassfish.hk2.extension;version="[3.0,4)",org.glassfish.hk
+ 2.utilities;version="[3.0,4)",org.glassfish.hk2.utilities.cache;version
+ ="[3.0,4)",org.glassfish.hk2.utilities.general;version="[3.0,4)",org.gl
+ assfish.hk2.utilities.reflection;version="[3.0,4)",org.glassfish.hk2.ut
+ ilities.reflection.internal;version="[3.0,4)",org.jvnet.hk2.annotations
+ ;version="[3.0,4)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=11))"
+Tool: Bnd-6.3.1.202206071316
+

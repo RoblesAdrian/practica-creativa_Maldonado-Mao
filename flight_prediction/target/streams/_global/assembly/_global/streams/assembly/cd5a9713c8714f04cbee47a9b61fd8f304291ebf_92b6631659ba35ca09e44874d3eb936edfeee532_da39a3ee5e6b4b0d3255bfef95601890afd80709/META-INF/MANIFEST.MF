@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven Bundle Plugin
+Built-By: jenkins
+Build-Jdk: 11.0.2
+Bnd-LastModified: 1653588080671
+Bundle-Description: Jakarta Bean Validation API
+Bundle-DocURL: https://www.eclipse.org
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: Jakarta Bean Validation API
+Bundle-SymbolicName: jakarta.validation.jakarta.validation-api
+Bundle-Vendor: Eclipse Foundation
+Bundle-Version: 3.0.2
+Export-Package: jakarta.validation;version="3.0.2";uses:="jakarta.valida
+ tion.bootstrap,jakarta.validation.executable,jakarta.validation.metadat
+ a,jakarta.validation.spi,jakarta.validation.valueextraction",jakarta.va
+ lidation.bootstrap;version="3.0.2";uses:="jakarta.validation",jakarta.v
+ alidation.constraints;version="3.0.2";uses:="jakarta.validation",jakart
+ a.validation.constraintvalidation;version="3.0.2",jakarta.validation.ex
+ ecutable;version="3.0.2";uses:="jakarta.validation",jakarta.validation.
+ groups;version="3.0.2",jakarta.validation.metadata;version="3.0.2";uses
+ :="jakarta.validation",jakarta.validation.spi;version="3.0.2";uses:="ja
+ karta.validation,jakarta.validation.valueextraction",jakarta.validation
+ .valueextraction;version="3.0.2";uses:="jakarta.validation"
+Import-Package: jakarta.validation;version="[3.0,4)",jakarta.validation.
+ bootstrap;version="[3.0,4)",jakarta.validation.executable;version="[3.0
+ ,4)",jakarta.validation.metadata;version="[3.0,4)",jakarta.validation.s
+ pi;version="[3.0,4)",jakarta.validation.valueextraction;version="[3.0,4
+ )"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-3.5.0.201709291849
+

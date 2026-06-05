@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Specification-Title: breeze-macros
+Specification-Version: 2.1.0
+Specification-Vendor: org.scalanlp
+Implementation-Title: breeze-macros
+Implementation-Version: 2.1.0
+Implementation-Vendor: org.scalanlp
+Implementation-Vendor-Id: org.scalanlp
+Implementation-URL: https://github.com/scalanlp/breeze
+

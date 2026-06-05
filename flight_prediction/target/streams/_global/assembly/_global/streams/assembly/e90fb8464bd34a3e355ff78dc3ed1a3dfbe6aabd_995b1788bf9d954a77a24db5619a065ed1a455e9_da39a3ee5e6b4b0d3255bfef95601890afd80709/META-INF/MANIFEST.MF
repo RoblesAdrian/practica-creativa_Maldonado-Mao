@@ -1,0 +1,35 @@
+Manifest-Version: 1.0
+Implementation-Version: 0.16.0
+Automatic-Module-Name: org.apache.thrift
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.apache.thrift
+Bundle-Name: Apache Thrift
+Bundle-Version: 0.16.0
+Bundle-Description: Apache Thrift library
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ActivationPolicy: lazy
+Export-Package: org.apache.thrift.async;uses:="org.apache.thrift.protoco
+ l,org.apache.thrift.transport,org.slf4j,org.apache.thrift";version="0.1
+ 6.0",org.apache.thrift.protocol;uses:="org.apache.thrift.transport,org.
+ apache.thrift,org.apache.thrift.scheme";version="0.16.0",org.apache.thr
+ ift.server;uses:="org.apache.thrift.transport,org.apache.thrift.protoco
+ l,org.apache.thrift,org.slf4j,javax.servlet,javax.servlet.http";version
+ ="0.16.0",org.apache.thrift.transport;uses:="org.apache.thrift.protocol
+ ,org.apache.thrift,org.apache.http.client,org.apache.http.params,org.ap
+ ache.http.entity,org.apache.http.client.methods,org.apache.http,org.slf
+ 4j,javax.net.ssl,javax.net,javax.security.sasl,javax.security.auth.call
+ back";version="0.16.0",org.apache.thrift;uses:="org.apache.thrift.proto
+ col,org.apache.thrift.async,org.apache.thrift.server,org.apache.thrift.
+ transport,org.slf4j,org.apache.log4j,org.apache.thrift.scheme";version=
+ "0.16.0",org.apache.thrift.meta_data;uses:="org.apache.thrift";version=
+ "0.16.0",org.apache.thrift.scheme;uses:="org.apache.thrift.protocol,org
+ .apache.thrift";version="0.16.0",org.apache.thrift.annotation;version="
+ 0.16.0"
+Import-Package: javax.net,javax.net.ssl,javax.security.auth.callback,jav
+ ax.security.sasl,javax.servlet;resolution:=optional,javax.servlet.http;
+ resolution:=optional,org.slf4j;resolution:=optional;version="[1.4,2)",o
+ rg.apache.http.client;resolution:=optional,org.apache.http.params;resol
+ ution:=optional,org.apache.http.entity;resolution:=optional,org.apache.
+ http.client.methods;resolution:=optional,org.apache.http;resolution:=op
+ tional
+

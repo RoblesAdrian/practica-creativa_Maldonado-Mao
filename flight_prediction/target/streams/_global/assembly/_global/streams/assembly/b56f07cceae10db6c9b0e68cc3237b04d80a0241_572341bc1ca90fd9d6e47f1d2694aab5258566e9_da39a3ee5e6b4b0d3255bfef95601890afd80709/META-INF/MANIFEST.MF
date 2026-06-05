@@ -1,0 +1,46 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven Bundle Plugin 5.1.8
+Built-By: root
+Build-Jdk: 11.0.28
+Specification-Title: Netty/Codec/Compression
+Specification-Version: 4.2
+Specification-Vendor: The Netty Project
+Implementation-Title: Netty/Codec/Compression
+Implementation-Version: 4.2.7.Final
+Implementation-Vendor-Id: io.netty
+Implementation-Vendor: The Netty Project
+Implementation-URL: https://netty.io/netty-codec-compression/
+Multi-Release: true
+Bnd-LastModified: 1760446285578
+Build-Jdk-Spec: 11
+Bundle-Description: Netty is an asynchronous event-driven network applic
+ ation framework for    rapid development of maintainable high performan
+ ce protocol servers and    clients.
+Bundle-DocURL: https://netty.io/
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Netty/Codec/Compression
+Bundle-SymbolicName: io.netty.codec-compression
+Bundle-Vendor: The Netty Project
+Bundle-Version: 4.2.7.Final
+Export-Package: io.netty.handler.codec.compression;uses:="com.aayushatha
+ rva.brotli4j.encoder,io.netty.buffer,io.netty.channel,io.netty.handler.
+ codec,net.jpountz.lz4";version="4.2.7"
+Import-Package: com.aayushatharva.brotli4j;resolution:=optional,com.aayu
+ shatharva.brotli4j.decoder;resolution:=optional,com.aayushatharva.brotl
+ i4j.encoder;resolution:=optional,com.github.luben.zstd;version="[1.5,2)
+ ";resolution:=optional,com.github.luben.zstd.util;version="[1.5,2)";res
+ olution:=optional,com.jcraft.jzlib;resolution:=optional,com.ning.compre
+ ss;version="[1.0,2)";resolution:=optional,com.ning.compress.lzf;version
+ ="[1.0,2)";resolution:=optional,com.ning.compress.lzf.util;version="[1.
+ 0,2)";resolution:=optional,io.netty.buffer;version="[4.2,5)",io.netty.c
+ hannel;version="[4.2,5)",io.netty.handler.codec;version="[4.2,5)",io.ne
+ tty.util;version="[4.2,5)",io.netty.util.concurrent;version="[4.2,5)",i
+ o.netty.util.internal;version="[4.2,5)",io.netty.util.internal.logging;
+ version="[4.2,5)",lzma.sdk;resolution:=optional,lzma.sdk.lzma;resolutio
+ n:=optional,net.jpountz.lz4;resolution:=optional,net.jpountz.xxhash;res
+ olution:=optional,sun.nio.ch;resolution:=optional,org.bouncycastle.jcaj
+ ce.provider;version="[1.0,2)";resolution:=optional
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-6.3.1.202206071316
+

@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+git-branch: 6.2.X
+git-commit-user-email: leerho@gmail.com
+GroupId-ArtifactId: org.apache.datasketches:datasketches-java
+git-commit-tag: 6.2.0-RC1
+Build-OS: Mac OS X aarch64 15.0
+git-commit-id: 9ca65f12b7bdde9b424f27be1d16f2f9dc365a7a
+git-commit-time: 2025-01-11T03:33:21+0000
+Build-Jdk: 1.8 (Azul Systems, Inc. 25.402-b06)
+Implementation-Vendor: The Apache Software Foundation
+

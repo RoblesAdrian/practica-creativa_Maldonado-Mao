@@ -1,0 +1,60 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven Bundle Plugin 5.1.8
+Built-By: root
+Build-Jdk: 11.0.28
+Specification-Title: Netty/Codec/HTTP
+Specification-Version: 4.2
+Specification-Vendor: The Netty Project
+Implementation-Title: Netty/Codec/HTTP
+Implementation-Version: 4.2.7.Final
+Implementation-Vendor-Id: io.netty
+Implementation-Vendor: The Netty Project
+Implementation-URL: https://netty.io/netty-codec-http/
+Multi-Release: true
+Bnd-LastModified: 1760446353126
+Build-Jdk-Spec: 11
+Bundle-Description: Netty is an asynchronous event-driven network applic
+ ation framework for    rapid development of maintainable high performan
+ ce protocol servers and    clients.
+Bundle-DocURL: https://netty.io/
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Netty/Codec/HTTP
+Bundle-SymbolicName: io.netty.codec-http
+Bundle-Vendor: The Netty Project
+Bundle-Version: 4.2.7.Final
+Export-Package: io.netty.handler.codec.http;uses:="io.netty.buffer,io.ne
+ tty.channel,io.netty.channel.embedded,io.netty.handler.codec,io.netty.h
+ andler.codec.compression,io.netty.handler.codec.http.cookie,io.netty.ha
+ ndler.stream,io.netty.util";version="4.2.7",io.netty.handler.codec.http
+ .cookie;version="4.2.7",io.netty.handler.codec.http.cors;uses:="io.nett
+ y.channel,io.netty.handler.codec.http";version="4.2.7",io.netty.handler
+ .codec.http.multipart;uses:="io.netty.buffer,io.netty.channel,io.netty.
+ handler.codec,io.netty.handler.codec.http,io.netty.handler.stream,io.ne
+ tty.util";version="4.2.7",io.netty.handler.codec.http.websocketx;uses:=
+ "io.netty.buffer,io.netty.channel,io.netty.handler.codec,io.netty.handl
+ er.codec.http,io.netty.handler.stream,io.netty.util,io.netty.util.inter
+ nal.logging";version="4.2.7",io.netty.handler.codec.http.websocketx.ext
+ ensions;uses:="io.netty.channel,io.netty.handler.codec,io.netty.handler
+ .codec.http,io.netty.handler.codec.http.websocketx";version="4.2.7",io.
+ netty.handler.codec.http.websocketx.extensions.compression;uses:="io.ne
+ tty.channel,io.netty.handler.codec.http.websocketx.extensions";version=
+ "4.2.7",io.netty.handler.codec.rtsp;uses:="io.netty.buffer,io.netty.cha
+ nnel,io.netty.handler.codec.http,io.netty.util";version="4.2.7",io.nett
+ y.handler.codec.spdy;uses:="io.netty.buffer,io.netty.channel,io.netty.h
+ andler.codec,io.netty.handler.codec.http,io.netty.util";version="4.2.7"
+Import-Package: com.aayushatharva.brotli4j.encoder;resolution:=optional,
+ com.jcraft.jzlib;resolution:=optional,io.netty.buffer;version="[4.2,5)"
+ ,io.netty.channel;version="[4.2,5)",io.netty.channel.embedded;version="
+ [4.2,5)",io.netty.handler.codec;version="[4.2,5)",io.netty.handler.code
+ c.compression;version="[4.2,5)",io.netty.handler.codec.http,io.netty.ha
+ ndler.codec.http.cookie,io.netty.handler.codec.http.websocketx,io.netty
+ .handler.codec.http.websocketx.extensions,io.netty.handler.ssl;version=
+ "[4.2,5)",io.netty.handler.stream;version="[4.2,5)",io.netty.util;versi
+ on="[4.2,5)",io.netty.util.concurrent;version="[4.2,5)",io.netty.util.i
+ nternal;version="[4.2,5)",io.netty.util.internal.logging;version="[4.2,
+ 5)",sun.nio.ch;resolution:=optional,org.bouncycastle.jcajce.provider;ve
+ rsion="[1.0,2)";resolution:=optional
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-6.3.1.202206071316
+

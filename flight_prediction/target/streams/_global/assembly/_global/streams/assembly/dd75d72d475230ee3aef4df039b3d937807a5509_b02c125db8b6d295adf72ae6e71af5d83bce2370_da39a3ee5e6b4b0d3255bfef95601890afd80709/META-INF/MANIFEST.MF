@@ -1,0 +1,65 @@
+Manifest-Version: 1.0
+Created-By: Maven JAR Plugin 3.4.2
+Build-Jdk-Spec: 17
+Specification-Title: Apache Log4j API
+Specification-Version: 2.24
+Specification-Vendor: The Apache Software Foundation
+Implementation-Title: Apache Log4j API
+Implementation-Version: 2.24.3
+Implementation-Vendor: The Apache Software Foundation
+Multi-Release: true
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.apache.logging.log4j.util.Activator
+Bundle-Description: The logging API of the Log4j project.     Library an
+ d application code can log through this API.     It contains a simple b
+ uilt-in implementation (`SimpleLogger`) for trivial use cases.     Prod
+ uction applications are recommended to use Log4j API in combination wit
+ h a fully-fledged implementation, such as Log4j Core.
+Bundle-License: "Apache-2.0";link="https://www.apache.org/licenses/LICEN
+ SE-2.0.txt"
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Log4j API
+Bundle-SymbolicName: org.apache.logging.log4j.api
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 2.24.3
+Export-Package: org.apache.logging.log4j;version="2.20.2";uses:="org.apa
+ che.logging.log4j.message,org.apache.logging.log4j.spi,org.apache.loggi
+ ng.log4j.util",org.apache.logging.log4j.message;version="2.24.1";uses:=
+ "org.apache.logging.log4j.util",org.apache.logging.log4j.simple;version
+ ="2.24.1";uses:="org.apache.logging.log4j,org.apache.logging.log4j.mess
+ age,org.apache.logging.log4j.spi,org.apache.logging.log4j.util,org.jspe
+ cify.annotations",org.apache.logging.log4j.spi;version="2.24.2";uses:="
+ org.apache.logging.log4j,org.apache.logging.log4j.message,org.apache.lo
+ gging.log4j.util,org.jspecify.annotations",org.apache.logging.log4j.sta
+ tus;version="2.23.1";uses:="org.apache.logging.log4j,org.apache.logging
+ .log4j.message,org.apache.logging.log4j.spi",org.apache.logging.log4j.u
+ til;version="2.24.0";uses:="org.apache.logging.log4j,org.apache.logging
+ .log4j.message,org.apache.logging.log4j.spi,org.osgi.framework"
+Import-Package: org.jspecify.annotations;resolution:=optional;version="[
+ 1.0,2)",org.apache.logging.log4j.status;version="[2.23,3)",org.osgi.fra
+ mework;version="[1.8,2)",org.osgi.framework.wiring;version="[1.2,2)"
+Private-Package: org.apache.logging.log4j.internal,org.apache.logging.lo
+ g4j.internal.map,org.apache.logging.log4j.simple.internal,org.apache.lo
+ gging.log4j.util.internal
+Provide-Capability: osgi.service;objectClass:List<String>="org.apache.lo
+ gging.log4j.util.PropertySource";effective:=active,osgi.serviceloader;o
+ sgi.serviceloader="org.apache.logging.log4j.util.PropertySource";regist
+ er:="org.apache.logging.log4j.util.EnvironmentPropertySource",osgi.serv
+ iceloader;osgi.serviceloader="org.apache.logging.log4j.util.PropertySou
+ rce";register:="org.apache.logging.log4j.util.SystemPropertiesPropertyS
+ ource"
+Require-Capability: osgi.extender;filter:="(&(osgi.extender=osgi.service
+ loader.processor)(version>=1.0.0)(!(version>=2.0.0)))";resolution:=opti
+ onal,osgi.extender;filter:="(&(osgi.extender=osgi.serviceloader.registr
+ ar)(version>=1.0.0)(!(version>=2.0.0)))";resolution:=optional,osgi.serv
+ iceloader;filter:="(osgi.serviceloader=org.apache.logging.log4j.message
+ .ThreadDumpMessage$ThreadInfoFactory)";osgi.serviceloader="org.apache.l
+ ogging.log4j.message.ThreadDumpMessage$ThreadInfoFactory";cardinality:=
+ single;resolution:=optional,osgi.serviceloader;filter:="(osgi.servicelo
+ ader=org.apache.logging.log4j.spi.Provider)";osgi.serviceloader="org.ap
+ ache.logging.log4j.spi.Provider";cardinality:=multiple;resolution:=opti
+ onal,osgi.serviceloader;filter:="(osgi.serviceloader=org.apache.logging
+ .log4j.util.PropertySource)";osgi.serviceloader="org.apache.logging.log
+ 4j.util.PropertySource";cardinality:=multiple;resolution:=optional,osgi
+ .ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+

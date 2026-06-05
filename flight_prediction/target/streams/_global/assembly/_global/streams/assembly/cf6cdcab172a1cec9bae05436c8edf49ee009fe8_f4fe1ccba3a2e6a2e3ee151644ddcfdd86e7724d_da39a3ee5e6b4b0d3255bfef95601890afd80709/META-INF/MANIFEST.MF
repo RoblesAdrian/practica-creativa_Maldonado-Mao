@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Created-By: Maven JAR Plugin 3.4.2
+Build-Jdk-Spec: 17
+Specification-Title: Spark Project Unsafe
+Specification-Version: 4.1
+Specification-Vendor: Apache Software Foundation
+Implementation-Title: Spark Project Unsafe
+Implementation-Version: 4.1.2
+Implementation-Vendor: Apache Software Foundation
+

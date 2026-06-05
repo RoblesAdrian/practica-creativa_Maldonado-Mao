@@ -1,0 +1,15 @@
+JarIndex-Version: 1.0
+
+netty-codec-native-quic-4.2.7.Final-osx-x86_64.jar
+META-INF
+META-INF/license
+META-INF/maven
+META-INF/maven/io.netty
+META-INF/maven/io.netty/netty-codec-native-quic
+META-INF/native-image
+META-INF/native-image/io.netty
+META-INF/native-image/io.netty/netty-codec-native-quic
+META-INF/native
+META-INF/versions
+META-INF/versions/11
+

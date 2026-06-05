@@ -9,7 +9,7 @@
   </p>
 
   <!-- Generate form from search_config and request args -->
-  <form id="flight_delay_classification" action="/flights/delays/predict/classify_realtime" method="post">
+  <form id="flight_delay_classification">
     {% for item in form_config %}
       {% if 'label' in item %}
         <label for="{{item['field']}}">{{item['label']}}</label>
@@ -30,5 +30,6 @@
   </div>
 
   <!-- Load our form processing javascript -->
-  <script src="/static/flight_delay_predict_polling.js"></script>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="/static/flight_delay_predict_socketio.js"></script>
 {% endblock %}

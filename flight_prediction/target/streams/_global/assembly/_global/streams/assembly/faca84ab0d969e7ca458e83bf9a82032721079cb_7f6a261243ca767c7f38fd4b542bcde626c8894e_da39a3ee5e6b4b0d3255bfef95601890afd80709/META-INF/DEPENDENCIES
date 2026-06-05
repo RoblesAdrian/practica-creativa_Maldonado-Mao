@@ -1,0 +1,125 @@
+// ------------------------------------------------------------------
+// Transitive dependencies of this project determined from the
+// maven pom organized by organization.
+// ------------------------------------------------------------------
+
+Apache Log4j Core
+
+
+From: 'an unknown organization'
+
+  - Disruptor Framework (http://lmax-exchange.github.com/disruptor) com.lmax:disruptor:jar:3.4.4
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - eu.neilalexander:jnacl (https://github.com/neilalexander/jnacl) eu.neilalexander:jnacl:jar:1.0.0
+    License: The BSD 2-Clause License  (http://opensource.org/licenses/bsd-license.php)
+
+  - JavaBeans Activation Framework (JAF) (http://java.sun.com/products/javabeans/jaf/index.jsp) javax.activation:activation:jar:1.1
+    License: Common Development and Distribution License (CDDL) v1.0  (https://glassfish.dev.java.net/public/CDDLv1.0.html)
+
+  - Apache Kafka (https://kafka.apache.org) org.apache.kafka:kafka-clients:jar:3.8.0
+    License: The Apache License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - Java Concurrency Tools Core Library (https://github.com/JCTools) org.jctools:jctools-core:bundle:4.0.5
+    License: Apache License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - LZ4 and xxHash (https://github.com/lz4/lz4-java) org.lz4:lz4-java:jar:1.8.0
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - SnakeYAML (https://bitbucket.org/snakeyaml/snakeyaml) org.yaml:snakeyaml:bundle:2.2
+    License: Apache License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - JeroMQ (https://github.com/zeromq/jeromq) org.zeromq:jeromq:jar:0.6.0
+    License: Mozilla Public License version 2.0  (https://www.mozilla.org/en-US/MPL/2.0)
+
+
+From: 'com.github.luben'
+
+  - zstd-jni (https://github.com/luben/zstd-jni) com.github.luben:zstd-jni:jar:1.5.6-6
+    License: BSD 2-Clause License  (https://opensource.org/licenses/BSD-2-Clause)
+
+
+From: 'Conversant Engineering' (http://engineering.conversantmedia.com)
+
+  - com.conversantmedia:disruptor (https://github.com/conversant/disruptor) com.conversantmedia:disruptor:jar:1.2.15
+    License: The Apache License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+
+From: 'FasterXML' (http://fasterxml.com)
+
+  - Woodstox (https://github.com/FasterXML/woodstox) com.fasterxml.woodstox:woodstox-core:bundle:6.7.0
+    License: The Apache License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+
+From: 'FasterXML' (http://fasterxml.com/)
+
+  - Jackson-annotations (https://github.com/FasterXML/jackson) com.fasterxml.jackson.core:jackson-annotations:jar:2.17.2
+    License: The Apache Software License, Version 2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - Jackson-core (https://github.com/FasterXML/jackson-core) com.fasterxml.jackson.core:jackson-core:jar:2.17.2
+    License: The Apache Software License, Version 2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - jackson-databind (https://github.com/FasterXML/jackson) com.fasterxml.jackson.core:jackson-databind:jar:2.17.2
+    License: The Apache Software License, Version 2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - Jackson-dataformat-XML (https://github.com/FasterXML/jackson-dataformat-xml) com.fasterxml.jackson.dataformat:jackson-dataformat-xml:jar:2.17.2
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - Jackson-dataformat-YAML (https://github.com/FasterXML/jackson-dataformats-text) com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:jar:2.17.2
+    License: The Apache Software License, Version 2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+
+From: 'fasterxml.com' (http://fasterxml.com)
+
+  - Stax2 API (http://github.com/FasterXML/stax2-api) org.codehaus.woodstox:stax2-api:bundle:4.2.2
+    License: The BSD 2-Clause License  (http://www.opensource.org/licenses/bsd-license.php)
+
+
+From: 'FuseSource, Corp.' (http://fusesource.com/)
+
+  - Jansi (http://fusesource.github.io/jansi) org.fusesource.jansi:jansi:jar:2.4.1
+    License: Apache License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+
+From: 'Oracle' (http://www.oracle.com)
+
+  - JavaMail API (http://javaee.github.io/javamail/javax.mail) com.sun.mail:javax.mail:jar:1.6.2
+    License: CDDL/GPLv2+CE  (https://javaee.github.io/javamail/LICENSE)
+
+
+From: 'QOS.ch' (http://www.qos.ch)
+
+  - SLF4J API Module (http://www.slf4j.org) org.slf4j:slf4j-api:jar:1.7.13
+    License: MIT License  (http://www.opensource.org/licenses/mit-license.php)
+
+
+From: 'The Apache Software Foundation' (https://www.apache.org/)
+
+  - Apache Commons Codec (https://commons.apache.org/proper/commons-codec/) commons-codec:commons-codec:jar:1.17.1
+    License: Apache-2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - Apache Commons IO (https://commons.apache.org/proper/commons-io/) commons-io:commons-io:jar:2.17.0
+    License: Apache-2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - Apache Commons Compress (https://commons.apache.org/proper/commons-compress/) org.apache.commons:commons-compress:jar:1.27.1
+    License: Apache-2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - Apache Commons CSV (https://commons.apache.org/proper/commons-csv/) org.apache.commons:commons-csv:jar:1.11.0
+    License: Apache-2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - Apache Commons Lang (https://commons.apache.org/proper/commons-lang/) org.apache.commons:commons-lang3:jar:3.17.0
+    License: Apache-2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - Apache Log4j API (https://logging.apache.org/log4j/2.x/log4j/log4j-api/) org.apache.logging.log4j:log4j-api:jar:2.24.3
+    License: Apache-2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+
+From: 'xerial.org' (https://github.com/xerial/snappy-java)
+
+  - snappy-java (https://github.com/xerial/snappy-java) org.xerial.snappy:snappy-java:bundle:1.1.10.5
+    License: Apache-2.0  (https://www.apache.org/licenses/LICENSE-2.0.html)
+
+
+
+
+

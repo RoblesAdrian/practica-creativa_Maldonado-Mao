@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Implementation-Title: JJWT :: Impl
+Built-By: lhazlewood
+Tool: Bnd-3.5.0.201709291849
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.7))"
+Implementation-Vendor: jsonwebtoken.io
+Fragment-Host: io.jsonwebtoken.jjwt-api 
+Implementation-Vendor-Id: io.jsonwebtoken
+Specification-Title: JJWT :: Impl
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0
+Bundle-SymbolicName: io.jsonwebtoken.jjwt-impl
+Implementation-Version: 0.12.6
+Specification-Vendor: jsonwebtoken.io
+Bundle-Name: JJWT :: Impl
+Created-By: Apache Maven Bundle Plugin
+Implementation-URL: https://github.com/jwtk/jjwt/jjwt-impl
+Bundle-Vendor: jsonwebtoken.io
+Build-Jdk-Spec: 1.7
+Build-Jdk: 1.7.0_352
+Bundle-Version: 0.12.6
+Bnd-LastModified: 1718999396419
+Bundle-ManifestVersion: 2
+Bundle-Description: JSON Web Token support for the JVM and Android
+Bundle-DocURL: https://github.com/jwtk/jjwt
+Specification-Version: 0.12.6
+Import-Package: io.jsonwebtoken;version="[0.12,1)",io.jsonwebtoken.io;
+ version="[0.12,1)",io.jsonwebtoken.lang;version="[0.12,1)",io.jsonweb
+ token.security;version="[0.12,1)",javax.crypto,javax.crypto.spec
+

@@ -1,0 +1,9 @@
+Flask
+Flask-SocketIO
+kafka-python
+cassandra-driver
+eventlet
+python-socketio
+pymongo
+iso8601
+joblib

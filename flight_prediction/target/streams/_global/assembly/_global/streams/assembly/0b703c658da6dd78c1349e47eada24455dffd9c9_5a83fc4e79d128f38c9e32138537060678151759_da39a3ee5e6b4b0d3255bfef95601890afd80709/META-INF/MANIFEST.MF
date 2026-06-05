@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Build-Jdk-Spec: 1.8
+Bundle-Description: Commons XMLSchema is a light weight schema object 
+ model that can be used to manipulate or        generate XML schema.
+Bundle-DocURL: http://ws.apache.org/xmlschema/
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: XmlSchema Core
+Bundle-SymbolicName: org.apache.ws.xmlschema.core
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 2.3.1
+Created-By: Apache Maven Bundle Plugin 5.1.9
+Export-Package: org.apache.ws.commons.schema;version="2.3.1",org.apach
+ e.ws.commons.schema.constants;version="2.3.1",org.apache.ws.commons.s
+ chema.extensions;version="2.3.1",org.apache.ws.commons.schema.resolve
+ r;version="2.3.1",org.apache.ws.commons.schema.utils;version="2.3.1"
+Implementation-Vendor: The Apache Software Foundation
+Implementation-Vendor-Id: org.apache
+Import-Package: javax.xml.namespace,javax.xml.parsers,javax.xml.transf
+ orm,javax.xml.transform.dom,javax.xml.transform.sax,javax.xml.transfo
+ rm.stream,org.apache.ws.commons.schema;version="[2.3,3)",org.apache.w
+ s.commons.schema.constants;version="[2.3,3)",org.apache.ws.commons.sc
+ hema.extensions;version="[2.3,3)",org.apache.ws.commons.schema.resolv
+ er;version="[2.3,3)",org.apache.ws.commons.schema.utils;version="[2.3
+ ,3)",org.w3c.dom,org.xml.sax
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Specification-Vendor: The Apache Software Foundation
+Tool: Bnd-6.3.1.202206071316
+

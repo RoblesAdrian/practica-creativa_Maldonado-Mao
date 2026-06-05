@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1681225593584
+Bundle-Description: istack common utility code
+Bundle-DocURL: https://www.eclipse.org
+Bundle-License: http://www.eclipse.org/org/documents/edl-v10.php
+Bundle-ManifestVersion: 2
+Bundle-Name: istack common utility code runtime
+Bundle-SymbolicName: com.sun.istack.commons-runtime
+Bundle-Vendor: Eclipse Foundation
+Bundle-Version: 4.1.2
+Created-By: Apache Maven Bundle Plugin 5.1.8
+Export-Package: com.sun.istack;uses:="jakarta.activation,javax.xml.strea
+ m,org.xml.sax,org.xml.sax.helpers";version="4.1.2",com.sun.istack.local
+ ization;version="4.1.2",com.sun.istack.logging;version="4.1.2"
+Implementation-Build-Id: 4.1.2 - 343a28e
+Implementation-Vendor: Eclipse Foundation
+Implementation-Vendor-Id: com.sun.istack
+Import-Package: jakarta.activation;version="[2.1,3)";resolution:=optiona
+ l,java.io,java.lang,java.lang.annotation,java.lang.invoke,java.lang.ref
+ ,java.text,java.util,java.util.concurrent,java.util.function,java.util.
+ logging,java.util.stream,javax.xml.namespace,javax.xml.stream,org.xml.s
+ ax,org.xml.sax.helpers
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=11))"
+Tool: Bnd-6.3.1.202206071316
+

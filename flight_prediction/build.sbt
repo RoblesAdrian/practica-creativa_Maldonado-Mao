@@ -4,9 +4,9 @@ name := "flight_prediction"
 
 version := "0.1"
 
-scalaVersion := "2.12.10"
+scalaVersion := "2.13.10"
 
-val sparkVersion = "3.5.3"
+val sparkVersion = "4.1.2"
 
 mainClass in Compile := Some("es.upm.dit.ging.predictor.MakePrediction")
 
@@ -21,6 +21,12 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-streaming" % sparkVersion,
   "org.apache.spark" %% "spark-hive" % sparkVersion,
   "org.apache.spark" %% "spark-sql-kafka-0-10" % sparkVersion,
-  "org.mongodb.spark" %% "mongo-spark-connector" % "10.4.1"
+  "org.mongodb.spark" %% "mongo-spark-connector" % "10.4.1",
+  "com.datastax.spark" %% "spark-cassandra-connector-assembly" % "3.5.0"
 
 )
+
+assembly / assemblyMergeStrategy := {
+  case PathList("META-INF", _*) => MergeStrategy.discard
+  case _ => MergeStrategy.first
+}

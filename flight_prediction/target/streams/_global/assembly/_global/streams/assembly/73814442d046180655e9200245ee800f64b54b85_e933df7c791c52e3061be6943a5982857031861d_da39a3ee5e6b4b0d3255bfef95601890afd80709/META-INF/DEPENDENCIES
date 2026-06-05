@@ -1,0 +1,101 @@
+// ------------------------------------------------------------------
+// Transitive dependencies of this project determined from the
+// maven pom organized by organization.
+// ------------------------------------------------------------------
+
+Spark Project Variant
+
+
+From: 'an unknown organization'
+
+  - ParaNamer Core (https://github.com/paul-hammant/paranamer/paranamer) com.thoughtworks.paranamer:paranamer:bundle:2.8.3
+    License: BSD  (https://opensource.org/license/bsd-3-clause)
+
+  - empty (http://nexus.sonatype.org/oss-repository-hosting.html/unused) org.spark-project.spark:unused:jar:1.0.0
+    License: The Apache License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - oro  oro:oro:jar:2.0.8
+
+
+From: 'Apache Software Foundation' (https://www.apache.org)
+
+  - Spark Project Common Java Utils (https://spark.apache.org/) org.apache.spark:spark-common-utils-java_2.13:jar:4.1.2
+    License: Apache-2.0  (https://www.apache.org/licenses/LICENSE-2.0.html)
+
+  - Spark Project Common Utils (https://spark.apache.org/) org.apache.spark:spark-common-utils_2.13:jar:4.1.2
+    License: Apache-2.0  (https://www.apache.org/licenses/LICENSE-2.0.html)
+
+  - Spark Project Tags (https://spark.apache.org/) org.apache.spark:spark-tags_2.13:jar:4.1.2
+    License: Apache-2.0  (https://www.apache.org/licenses/LICENSE-2.0.html)
+
+
+From: 'com.fasterxml.jackson.module'
+
+  - jackson-module-scala (https://github.com/FasterXML/jackson-module-scala) com.fasterxml.jackson.module:jackson-module-scala_2.13:bundle:2.21.2
+    License: The Apache Software License, Version 2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+
+From: 'FasterXML' (http://fasterxml.com/)
+
+  - Jackson-annotations (https://github.com/FasterXML/jackson) com.fasterxml.jackson.core:jackson-annotations:jar:2.21
+    License: The Apache Software License, Version 2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - Jackson-core (https://github.com/FasterXML/jackson-core) com.fasterxml.jackson.core:jackson-core:jar:2.21.2
+    License: The Apache Software License, Version 2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - jackson-databind (https://github.com/FasterXML/jackson) com.fasterxml.jackson.core:jackson-databind:jar:2.21.2
+    License: The Apache Software License, Version 2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+
+From: 'LAMP/EPFL' (https://lamp.epfl.ch/)
+
+  - Scala Library (https://www.scala-lang.org/) org.scala-lang:scala-library:jar:2.13.17
+    License: Apache-2.0  (https://www.apache.org/licenses/LICENSE-2.0)
+
+
+From: 'QOS.ch' (http://www.qos.ch)
+
+  - JCL 1.2 implemented over SLF4J (http://www.slf4j.org) org.slf4j:jcl-over-slf4j:jar:2.0.17
+    License: Apache-2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - JUL to SLF4J bridge (http://www.slf4j.org) org.slf4j:jul-to-slf4j:jar:2.0.17
+    License: MIT  (https://opensource.org/license/mit)
+
+  - SLF4J API Module (http://www.slf4j.org) org.slf4j:slf4j-api:jar:2.0.17
+    License: MIT  (https://opensource.org/license/mit)
+
+
+From: 'The Apache Software Foundation' (http://www.apache.org)
+
+  - Apache XBean :: ASM shaded (repackaged) (http://geronimo.apache.org/maven/xbean/4.28/xbean-asm9-shaded) org.apache.xbean:xbean-asm9-shaded:bundle:4.28
+    License: $license.name  (http://asm.ow2.org/license.html)
+    License: $license.name  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+
+From: 'The Apache Software Foundation' (http://www.apache.org/)
+
+  - Apache Ivy (http://ant.apache.org/ivy/) org.apache.ivy:ivy:jar:2.5.3
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+
+From: 'The Apache Software Foundation' (https://www.apache.org/)
+
+  - Apache Log4j 1.x Compatibility API (https://logging.apache.org/log4j/2.x/log4j/log4j-1.2-api/) org.apache.logging.log4j:log4j-1.2-api:jar:2.24.3
+    License: Apache-2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - Apache Log4j API (https://logging.apache.org/log4j/2.x/log4j/log4j-api/) org.apache.logging.log4j:log4j-api:jar:2.24.3
+    License: Apache-2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - Apache Log4j Core (https://logging.apache.org/log4j/2.x/log4j/log4j-core/) org.apache.logging.log4j:log4j-core:jar:2.24.3
+    License: Apache-2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - Apache Log4j JSON Template Layout (https://logging.apache.org/log4j/2.x/log4j/log4j-layout-template-json/) org.apache.logging.log4j:log4j-layout-template-json:jar:2.24.3
+    License: Apache-2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+  - SLF4J 2 Provider for Log4j API (https://logging.apache.org/log4j/2.x/log4j/log4j-slf4j2-impl/) org.apache.logging.log4j:log4j-slf4j2-impl:jar:2.24.3
+    License: Apache-2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+
+
+
+

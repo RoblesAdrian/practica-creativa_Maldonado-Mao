@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven Bundle Plugin 5.1.9
+Build-Jdk-Spec: 21
+Automatic-Module-Name: org.apache.commons.pool2
+Implementation-Title: Apache Commons Pool
+Implementation-Vendor: The Apache Software Foundation
+Implementation-Vendor-Id: org.apache
+Implementation-Version: 2.12.1
+Specification-Title: Apache Commons Pool
+Specification-Vendor: The Apache Software Foundation
+Specification-Version: 2.12.1
+X-Compile-Source-JDK: 1.8
+X-Compile-Target-JDK: 1.8
+Bundle-Description: The Apache Commons Object Pooling Library.
+Bundle-DocURL: https://commons.apache.org/proper/commons-pool/
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Commons Pool
+Bundle-SymbolicName: org.apache.commons.commons-pool2
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 2.12.1
+Export-Package: org.apache.commons.pool2;version="2.12.1",org.apache.com
+ mons.pool2.impl;version="2.12.1",org.apache.commons.pool2.proxy;version
+ ="2.12.1"
+Import-Package: net.sf.cglib.proxy;resolution:=optional,javax.management
+Include-Resource: META-INF/LICENSE.txt=LICENSE.txt,META-INF/NOTICE.txt=N
+ OTICE.txt
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-6.4.1.202306080939
+Multi-Release: true
+

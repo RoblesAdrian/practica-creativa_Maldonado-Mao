@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven Bundle Plugin 5.1.8
+Built-By: runner
+Build-Jdk: 11.0.28
+Specification-Title: Netty/All-in-One
+Specification-Version: 4.2
+Specification-Vendor: The Netty Project
+Implementation-Title: Netty/All-in-One
+Implementation-Version: 4.2.7.Final
+Implementation-Vendor-Id: io.netty
+Implementation-Vendor: The Netty Project
+Implementation-URL: https://netty.io/netty-all/
+Multi-Release: true
+Bnd-LastModified: 1760447415533
+Build-Jdk-Spec: 11
+Bundle-Description: Netty is an asynchronous event-driven network applic
+ ation framework for    rapid development of maintainable high performan
+ ce protocol servers and    clients.
+Bundle-DocURL: https://netty.io/
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Netty/All-in-One
+Bundle-SymbolicName: io.netty.all
+Bundle-Vendor: The Netty Project
+Bundle-Version: 4.2.7.Final
+Import-Package: sun.nio.ch;resolution:=optional,org.bouncycastle.jcajce.
+ provider;version="[1.0,2)";resolution:=optional
+Tool: Bnd-6.3.1.202206071316
+

@@ -1,0 +1,35 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven Bundle Plugin 5.1.9
+Build-Jdk-Spec: 17
+Automatic-Module-Name: org.glassfish.hk2.api
+Bundle-Description: HK2 API module
+Bundle-DocURL: http://www.oracle.com
+Bundle-License: http://www.eclipse.org/legal/epl-2.0, https://www.gnu.or
+ g/software/classpath/license.html
+Bundle-ManifestVersion: 2
+Bundle-Name: HK2 API module
+Bundle-SymbolicName: org.glassfish.hk2.api
+Bundle-Vendor: Oracle Corporation
+Bundle-Version: 3.0.6
+DynamicImport-Package: *
+Export-Package: org.glassfish.hk2.api;version="3.0.6";uses:="jakarta.inj
+ ect,org.aopalliance.intercept,org.glassfish.hk2.extension,org.glassfish
+ .hk2.utilities,org.jvnet.hk2.annotations",org.glassfish.hk2.api.messagi
+ ng;version="3.0.6";uses:="jakarta.inject,org.glassfish.hk2.api,org.jvne
+ t.hk2.annotations",org.glassfish.hk2.extension;version="3.0.6";uses:="o
+ rg.glassfish.hk2.api",org.glassfish.hk2.utilities;version="3.0.6";uses:
+ ="jakarta.inject,org.glassfish.hk2.api,org.glassfish.hk2.utilities.bind
+ ing,org.jvnet.hk2.annotations",org.glassfish.hk2.utilities.binding;vers
+ ion="3.0.6";uses:="org.glassfish.hk2.api,org.glassfish.hk2.utilities",o
+ rg.jvnet.hk2.annotations;version="3.0.6";uses:="org.glassfish.hk2.api",
+ com.sun.hk2.component;version="3.0.6"
+Import-Package: jakarta.inject;version="[2.0,3)",org.aopalliance.interce
+ pt;version="[1.0,2)",org.glassfish.hk2.extension;version="[3.0,4)",org.
+ glassfish.hk2.osgiresourcelocator;version="[2.4,3)";resolution:=optiona
+ l,org.glassfish.hk2.utilities.binding;version="[3.0,4)",org.glassfish.h
+ k2.utilities.general;version="[3.0,4)",org.glassfish.hk2.utilities.refl
+ ection;version="[3.0,4)",org.jvnet.hk2.annotations;version="[3.0,4)",or
+ g.jvnet.hk2.component;version="[3.0,4)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=11))"
+Tool: Bnd-6.3.1.202206071316
+

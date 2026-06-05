@@ -1,0 +1,14 @@
+JarIndex-Version: 1.0
+
+netty-tcnative-classes-2.0.74.Final.jar
+META-INF
+META-INF/maven
+META-INF/maven/io.netty
+META-INF/maven/io.netty/netty-tcnative-classes
+META-INF/versions
+META-INF/versions/11
+io
+io/netty
+io/netty/internal
+io/netty/internal/tcnative
+

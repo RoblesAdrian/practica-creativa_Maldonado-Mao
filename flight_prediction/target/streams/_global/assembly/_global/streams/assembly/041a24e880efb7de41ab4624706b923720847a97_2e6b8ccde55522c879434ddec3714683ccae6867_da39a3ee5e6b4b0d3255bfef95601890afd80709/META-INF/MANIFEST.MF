@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Bundle-License: http://www.eclipse.org/legal/epl-2.0, https://www.gnu.
+ org/software/classpath/license.html
+Bundle-SymbolicName: jakarta.servlet-api
+Built-By: jenkins
+Bnd-LastModified: 1599478906731
+Implementation-Vendor-Id: org.eclipse
+Bundle-DocURL: https://www.eclipse.org
+Import-Package: jakarta.servlet,jakarta.servlet.annotation,jakarta.ser
+ vlet.descriptor
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Export-Package: jakarta.servlet;uses:="jakarta.servlet.annotation,jaka
+ rta.servlet.descriptor";version="5.0.0",jakarta.servlet.annotation;us
+ es:="jakarta.servlet";version="5.0.0",jakarta.servlet.descriptor;vers
+ ion="5.0.0",jakarta.servlet.http;uses:="jakarta.servlet";version="5.0
+ .0",jakarta.servlet.resources;version="5.0.0"
+Bundle-Name: Jakarta Servlet
+Extension-Name: jakarta.servlet
+Build-Jdk-Spec: 1.8
+Bundle-Description: Jakarta Servlet 5.0
+Automatic-Module-Name: jakarta.servlet
+Implementation-Version: 5.0.0
+Bundle-ManifestVersion: 2
+Specification-Vendor: Eclipse Foundation
+Bundle-Vendor: Eclipse Foundation
+Tool: Bnd-4.2.0.201903051501
+Implementation-Vendor: Eclipse Foundation
+Bundle-Version: 5.0.0
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.8.0_202
+Specification-Version: 5.0
+

@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Git-Branch: 3.0.X
+Git-Commit-Id-Full: 9fd3b45280e615cc52dbaf73cf2c046c877de448
+Git-Commit-User-Email: noreply@github.com
+GroupId-ArtifactId: org.apache.datasketches:datasketches-memory
+Git-Commit-Tag: 3.0.2
+Multi-Release: true
+Git-Commit-Time: 2024-09-30T16:47:14-07:00
+Created-By: Apache Datasketches Memory package-mr-jar.sh
+Implementation-Vendor: The Apache Software Foundation
+

@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven Bundle Plugin 5.1.9
+Build-Jdk-Spec: 17
+Automatic-Module-Name: org.aopalliance
+Bundle-Description: Dependency Injection Kernel
+Bundle-DocURL: http://www.oracle.com
+Bundle-License: http://www.eclipse.org/legal/epl-2.0, https://www.gnu.or
+ g/software/classpath/license.html
+Bundle-ManifestVersion: 2
+Bundle-Name: aopalliance version 1.0 repackaged as a module
+Bundle-SymbolicName: org.glassfish.hk2.external.aopalliance-repackaged
+Bundle-Vendor: Oracle Corporation
+Bundle-Version: 3.0.6
+Embed-Dependency: *;scope=compile;inline=true
+Export-Package: org.aopalliance.aop;version="1.0",org.aopalliance.instru
+ ment;version="1.0";uses:="org.aopalliance.reflect",org.aopalliance.inte
+ rcept;version="1.0";uses:="org.aopalliance.aop",org.aopalliance.reflect
+ ;version="1.0"
+Import-Package: org.aopalliance.aop;version="[1.0,2)";resolution:=option
+ al,org.aopalliance.reflect;version="[1.0,2)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=11))"
+Tool: Bnd-6.3.1.202206071316
+

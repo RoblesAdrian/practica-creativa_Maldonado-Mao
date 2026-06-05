@@ -1,0 +1,16 @@
+// ------------------------------------------------------------------
+// Transitive dependencies of this project determined from the
+// maven pom organized by organization.
+// ------------------------------------------------------------------
+
+datasketches-java
+
+
+From: 'an unknown organization'
+
+  - datasketches-memory (https://datasketches.apache.org/) org.apache.datasketches:datasketches-memory:pom:3.0.2
+
+
+
+
+

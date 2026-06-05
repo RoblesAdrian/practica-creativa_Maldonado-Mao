@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Implementation-Title: Hive Shims Scheduler
+Implementation-Version: 2.3.10
+Archiver-Version: Plexus Archiver
+Built-By: chao
+Specification-Vendor: The Apache Software Foundation
+Specification-Title: Hive Shims Scheduler
+Implementation-Vendor-Id: org.apache.hive.shims
+Created-By: Apache Maven 3.9.6
+Build-Jdk: 1.8.0_401
+Specification-Version: 2.3.10
+Implementation-Vendor: The Apache Software Foundation
+

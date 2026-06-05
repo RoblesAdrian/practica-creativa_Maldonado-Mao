@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: Cats algebra
+Implementation-Version: 2.8.0
+Specification-Vendor: Typelevel
+Specification-Title: Cats algebra
+Implementation-Vendor-Id: org.typelevel
+Specification-Version: 2.8.0
+Implementation-URL: https://typelevel.org/cats
+Implementation-Vendor: Typelevel
+

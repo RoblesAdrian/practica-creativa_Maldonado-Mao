@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven Bundle Plugin 5.1.9
+Build-Jdk-Spec: 21
+Bundle-Description: JUL to SLF4J bridge
+Bundle-DocURL: http://www.slf4j.org
+Bundle-License: https://opensource.org/license/mit
+Bundle-ManifestVersion: 2
+Bundle-Name: JUL to SLF4J bridge
+Bundle-SymbolicName: jul.to.slf4j
+Bundle-Vendor: SLF4J.ORG
+Bundle-Version: 2.0.17
+Export-Package: org.slf4j.bridge;uses:="org.slf4j,org.slf4j.spi";version
+ ="2.0.17"
+Implementation-Title: jul-to-slf4j
+Implementation-Version: 2.0.17
+Import-Package: org.slf4j;version="[2.0,3)",org.slf4j.spi;version="[2.0,
+ 3)"
+Multi-Release: true
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-6.3.1.202206071316
+X-Compile-Source-JDK: 8
+X-Compile-Target-JDK: 8
+

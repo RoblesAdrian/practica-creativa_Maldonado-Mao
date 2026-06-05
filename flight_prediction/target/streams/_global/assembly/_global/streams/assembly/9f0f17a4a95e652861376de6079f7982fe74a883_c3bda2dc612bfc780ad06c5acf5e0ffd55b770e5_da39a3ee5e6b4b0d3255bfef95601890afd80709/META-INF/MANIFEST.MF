@@ -1,0 +1,39 @@
+Manifest-Version: 1.0
+Created-By: Maven JAR Plugin 3.4.2
+Build-Jdk-Spec: 17
+Specification-Title: SLF4J 2 Provider for Log4j API
+Specification-Version: 2.24
+Specification-Vendor: The Apache Software Foundation
+Implementation-Title: SLF4J 2 Provider for Log4j API
+Implementation-Version: 2.24.3
+Implementation-Vendor: The Apache Software Foundation
+Bundle-ActivationPolicy: lazy
+Bundle-Description: SLF4J 2 provider (binding) for the Apache Log4j API.
+      It forwards SLF4J 2 calls to the Log4j API.     This effectively a
+ llows using Log4j as an implementation of SLF4J 2.     (Refer to the `l
+ og4j-to-slf4j` artifact for forwarding the Log4j API to SLF4J.)
+Bundle-License: "Apache-2.0";link="https://www.apache.org/licenses/LICEN
+ SE-2.0.txt"
+Bundle-ManifestVersion: 2
+Bundle-Name: SLF4J 2 Provider for Log4j API
+Bundle-SymbolicName: org.apache.logging.log4j.slf4j2.impl
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 2.24.3
+Export-Package: org.apache.logging.slf4j;version="2.21.0";uses:="org.apa
+ che.logging.log4j,org.apache.logging.log4j.spi,org.slf4j,org.slf4j.even
+ t,org.slf4j.spi",org.apache.logging.slf4j.message;version="2.24.0";uses
+ :="org.apache.logging.log4j.message"
+Import-Package: org.apache.logging.log4j;version="[2.20,3)",org.apache.l
+ ogging.log4j.message;version="[2.24,3)",org.apache.logging.log4j.spi;ve
+ rsion="[2.24,3)",org.apache.logging.log4j.status;version="[2.23,3)",org
+ .apache.logging.log4j.util;version="[2.24,3)",org.slf4j;version="[2.0,3
+ )",org.slf4j.event;version="[2.0,3)",org.slf4j.spi;version="[2.0,3)"
+Multi-Release: false
+Provide-Capability: osgi.service;objectClass:List<String>="org.slf4j.spi
+ .SLF4JServiceProvider";effective:=active,osgi.serviceloader;osgi.servic
+ eloader="org.slf4j.spi.SLF4JServiceProvider";register:="org.apache.logg
+ ing.slf4j.SLF4JServiceProvider"
+Require-Capability: osgi.extender;filter:="(&(osgi.extender=osgi.service
+ loader.registrar)(version>=1.0.0)(!(version>=2.0.0)))";resolution:=mand
+ atory,osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+

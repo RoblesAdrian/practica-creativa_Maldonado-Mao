@@ -1,0 +1,55 @@
+Manifest-Version: 1.0
+Created-By: Maven JAR Plugin 3.4.2
+Build-Jdk-Spec: 17
+Specification-Title: Apache Log4j Parent
+Specification-Version: 2.24
+Specification-Vendor: The Apache Software Foundation
+Implementation-Title: Apache Log4j Parent
+Implementation-Version: 2.24.3
+Implementation-Vendor: The Apache Software Foundation
+Bundle-Description: The Apache Log4j 1.x Compatibility API
+Bundle-License: "Apache-2.0";link="https://www.apache.org/licenses/LICEN
+ SE-2.0.txt"
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Log4j 1.x Compatibility API
+Bundle-SymbolicName: org.apache.logging.log4j.1.2.api
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 2.24.3
+Export-Package: org.apache.log4j;version="2.20.2";uses:="org.apache.log4
+ j.helpers,org.apache.log4j.or,org.apache.log4j.spi,org.apache.logging.l
+ og4j.message,org.apache.logging.log4j.spi",org.apache.log4j.builders;ve
+ rsion="2.20.1";uses:="org.apache.log4j,org.apache.log4j.config,org.apac
+ he.log4j.rewrite,org.apache.log4j.spi,org.apache.log4j.xml,org.w3c.dom"
+ ,org.apache.log4j.config;version="2.20.1";uses:="org.apache.log4j,org.a
+ pache.log4j.builders,org.apache.log4j.spi,org.apache.logging.log4j.spi"
+ ,org.apache.log4j.helpers;version="2.20.2";uses:="org.apache.log4j,org.
+ apache.log4j.spi",org.apache.log4j.jmx;version="2.20.1";uses:="javax.ma
+ nagement,org.apache.log4j,org.apache.log4j.spi",org.apache.log4j.or;ver
+ sion="2.20.1";uses:="org.apache.log4j.spi",org.apache.log4j.or.jms;vers
+ ion="2.20.1";uses:="org.apache.log4j.or",org.apache.log4j.pattern;versi
+ on="2.20.1",org.apache.log4j.rewrite;version="2.20.1";uses:="org.apache
+ .log4j.spi",org.apache.log4j.spi;version="2.20.1";uses:="org.apache.log
+ 4j,org.apache.log4j.or",org.apache.log4j.varia;version="2.20.1";uses:="
+ org.apache.log4j,org.apache.log4j.spi",org.apache.log4j.xml;version="2.
+ 20.2";uses:="javax.xml.parsers,org.apache.log4j,org.apache.log4j.config
+ ,org.apache.log4j.rewrite,org.apache.log4j.spi,org.w3c.dom,org.xml.sax"
+Fragment-Host: org.apache.logging.log4j.core
+Import-Package: javax.jms;version="[1.1,3)";resolution:=optional,java.be
+ ans,java.io,java.lang,java.lang.invoke,java.lang.reflect,java.net,java.
+ nio.charset,java.nio.file,java.nio.file.attribute,java.text,java.util,j
+ ava.util.concurrent,java.util.concurrent.atomic,java.util.function,java
+ .util.stream,javax.management,javax.xml.parsers,javax.xml.transform,jav
+ ax.xml.transform.stream,org.apache.log4j.helpers;version="[2.20,3)",org
+ .apache.log4j.or;version="[2.20,3)",org.apache.logging.log4j.message;ve
+ rsion="[2.24,3)",org.apache.logging.log4j.spi;version="[2.24,3)",org.ap
+ ache.logging.log4j.status;version="[2.23,3)",org.apache.logging.log4j.u
+ til;version="[2.24,3)",org.w3c.dom,org.xml.sax,com.sun.jdmk.comm;resolu
+ tion:=optional
+Multi-Release: false
+Private-Package: org.apache.log4j.bridge,org.apache.log4j.builders.appen
+ der,org.apache.log4j.builders.filter,org.apache.log4j.builders.layout,o
+ rg.apache.log4j.builders.rewrite,org.apache.log4j.builders.rolling,org.
+ apache.log4j.component.helpers,org.apache.log4j.layout,org.apache.log4j
+ .legacy.core
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+

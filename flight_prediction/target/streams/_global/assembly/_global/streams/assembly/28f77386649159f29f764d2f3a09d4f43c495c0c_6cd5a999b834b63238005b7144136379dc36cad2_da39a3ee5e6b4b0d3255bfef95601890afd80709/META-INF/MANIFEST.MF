@@ -1,0 +1,44 @@
+Manifest-Version: 1.0
+Bundle-Description: Jakarta XML Binding API 4.0 Design Specification
+Bundle-DocURL: https://www.eclipse.org
+Bundle-License: http://www.eclipse.org/org/documents/edl-v10.php
+Bundle-ManifestVersion: 2
+Bundle-Name: Jakarta XML Binding API
+Bundle-SymbolicName: jakarta.xml.bind-api
+Bundle-Vendor: Eclipse Foundation
+Bundle-Version: 4.0.2
+Created-By: Apache Maven Bundle Plugin 5.1.9
+DynamicImport-Package: org.glassfish.hk2.osgiresourcelocator
+Export-Package: jakarta.xml.bind;uses:="jakarta.xml.bind.annotation.adap
+ ters,jakarta.xml.bind.attachment,javax.xml.namespace,javax.xml.stream,j
+ avax.xml.transform,javax.xml.validation,org.w3c.dom,org.xml.sax";versio
+ n="4.0.2",jakarta.xml.bind.annotation;uses:="jakarta.xml.bind,javax.xml
+ .parsers,javax.xml.transform,javax.xml.transform.dom,org.w3c.dom";versi
+ on="4.0.2",jakarta.xml.bind.annotation.adapters;version="4.0.2",jakarta
+ .xml.bind.attachment;uses:="jakarta.activation";version="4.0.2",jakarta
+ .xml.bind.helpers;uses:="jakarta.xml.bind,jakarta.xml.bind.annotation.a
+ dapters,jakarta.xml.bind.attachment,javax.xml.stream,javax.xml.transfor
+ m,javax.xml.validation,org.w3c.dom,org.xml.sax";version="4.0.2",jakarta
+ .xml.bind.util;uses:="jakarta.xml.bind,javax.xml.transform.sax";version
+ ="4.0.2"
+Extension-Name: jakarta.xml.bind
+Implementation-Build-Id: ca43d8b
+Implementation-Version: 4.0.2
+Import-Package: jakarta.activation;version="[2.1,3)",jakarta.xml.bind,ja
+ karta.xml.bind.annotation,jakarta.xml.bind.annotation.adapters,jakarta.
+ xml.bind.attachment,java.io,java.lang,java.lang.annotation,java.lang.in
+ voke,java.lang.ref,java.lang.reflect,java.math,java.net,java.nio.charse
+ t,java.security,java.text,java.util,java.util.function,java.util.loggin
+ g,java.util.stream,javax.xml.datatype,javax.xml.namespace,javax.xml.par
+ sers,javax.xml.stream,javax.xml.transform,javax.xml.transform.dom,javax
+ .xml.transform.sax,javax.xml.transform.stream,javax.xml.validation,org.
+ w3c.dom,org.xml.sax,org.xml.sax.ext,org.xml.sax.helpers
+Require-Capability: osgi.extender;filter:="(&(osgi.extender=osgi.service
+ loader.processor)(version>=1.0.0)(!(version>=2.0.0)))";resolution:=opti
+ onal,osgi.serviceloader;filter:="(osgi.serviceloader=jakarta.xml.bind.J
+ AXBContextFactory)";osgi.serviceloader="jakarta.xml.bind.JAXBContextFac
+ tory";cardinality:=multiple;resolution:=optional,osgi.ee;filter:="(&(os
+ gi.ee=JavaSE)(version=11))"
+Specification-Vendor: Eclipse Foundation
+Specification-Version: 4.0
+

@@ -1,0 +1,40 @@
+Manifest-Version: 1.0
+Created-By: Maven JAR Plugin 3.4.2
+Build-Jdk-Spec: 17
+Specification-Title: Apache Log4j JSON Template Layout
+Specification-Version: 2.24
+Specification-Vendor: The Apache Software Foundation
+Implementation-Title: Apache Log4j JSON Template Layout
+Implementation-Version: 2.24.3
+Implementation-Vendor: The Apache Software Foundation
+Bundle-Description: Apache Log4j Layout for producing JSON output that i
+ s structured according to a user-provided template.
+Bundle-License: "Apache-2.0";link="https://www.apache.org/licenses/LICEN
+ SE-2.0.txt"
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Log4j JSON Template Layout
+Bundle-SymbolicName: org.apache.logging.log4j.layout.template.json
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 2.24.3
+Export-Package: org.apache.logging.log4j.layout.template.json;version="2
+ .21.0";uses:="org.apache.logging.log4j.layout.template.json.util",org.a
+ pache.logging.log4j.layout.template.json.resolver;version="2.21.0";uses
+ :="org.apache.logging.log4j.layout.template.json,org.apache.logging.log
+ 4j.layout.template.json.util",org.apache.logging.log4j.layout.template.
+ json.util;version="2.22.0";uses:="org.apache.logging.log4j.util"
+Fragment-Host: org.apache.logging.log4j.core
+Import-Package: org.jctools.queues;resolution:=optional;version="[4.0,5)
+ ",java.io,java.lang,java.lang.invoke,java.lang.reflect,java.math,java.n
+ et,java.nio,java.nio.charset,java.nio.file,java.text,java.time,java.tim
+ e.format,java.time.temporal,java.util,java.util.concurrent,java.util.co
+ ncurrent.atomic,java.util.concurrent.locks,java.util.function,java.util
+ .regex,java.util.stream,org.apache.logging.log4j.layout.template.json;v
+ ersion="[2.21,3)",org.apache.logging.log4j.layout.template.json.resolve
+ r;version="[2.21,3)",org.apache.logging.log4j.layout.template.json.util
+ ;version="[2.22,3)",org.apache.logging.log4j.message;version="[2.24,3)"
+ ,org.apache.logging.log4j.spi;version="[2.24,3)",org.apache.logging.log
+ 4j.status;version="[2.23,3)",org.apache.logging.log4j.util;version="[2.
+ 24,3)"
+Multi-Release: false
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+

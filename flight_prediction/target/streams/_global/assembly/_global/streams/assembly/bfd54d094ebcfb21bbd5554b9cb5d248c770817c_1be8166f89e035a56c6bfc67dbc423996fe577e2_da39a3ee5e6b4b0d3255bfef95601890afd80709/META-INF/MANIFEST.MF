@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Ant-Version: Intentionally omitted
+Created-By: 21
+Implementation-Title: XZ data compression
+Implementation-Version: 1.10
+Implementation-URL: https://tukaani.org/xz/java.html
+Sealed: true
+Multi-Release: true
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.tukaani.xz
+Bundle-Version: 1.10
+Export-Package: org.tukaani.xz
+Bundle-Name: XZ data compression
+Bundle-DocURL: https://tukaani.org/xz/xz-javadoc/
+Bundle-Copyright: The XZ for Java authors and contributors
+Bundle-License: 0BSD
+Build-Jdk-Spec: 21
+

@@ -1,160 +1,212 @@
 package es.upm.dit.ging.predictor
-import com.mongodb.spark._
-import org.apache.spark.ml.classification.RandomForestClassificationModel
-import org.apache.spark.ml.feature.{Bucketizer, StringIndexerModel, VectorAssembler}
-import org.apache.spark.sql.functions.{concat, from_json, lit}
-import org.apache.spark.sql.types.{DataTypes, StructType}
+
 import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types._
+import org.apache.spark.ml.classification.RandomForestClassificationModel
+import org.apache.spark.ml.feature.{StringIndexer, StringIndexerModel, VectorAssembler}
+import org.apache.spark.sql.streaming.Trigger
+import com.datastax.spark.connector._
 
 object MakePrediction {
 
-  def main(args: Array[String]): Unit = {
-    println("Fligth predictor starting...")
-
-    val spark = SparkSession
-      .builder
-      .appName("StructuredNetworkWordCount")
-      .master("local[*]")
+  def buildSpark(): SparkSession = {
+    SparkSession.builder()
+      .appName("MakePredictionLakehouseKafka")
+      .config("spark.sql.extensions", "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions")
+      .config("spark.sql.catalog.lakehouse", "org.apache.iceberg.spark.SparkCatalog")
+      .config("spark.sql.catalog.lakehouse.type", "rest")
+      .config("spark.sql.catalog.lakehouse.uri", "http://iceberg-rest:8181")
+      .config("spark.sql.catalog.lakehouse.warehouse", "s3://warehouse/")
+      .config("spark.sql.catalog.lakehouse.io-impl", "org.apache.iceberg.aws.s3.S3FileIO")
+      .config("spark.sql.catalog.lakehouse.client.region", "eu-south-2")
+      .config("spark.sql.catalog.lakehouse.s3.endpoint", "http://minio:9000")
+      .config("spark.sql.catalog.lakehouse.s3.access-key-id", "admin")
+      .config("spark.sql.catalog.lakehouse.s3.secret-access-key", "password")
+      .config("spark.sql.catalog.lakehouse.s3.path-style-access", "true")
+      .config("spark.sql.defaultCatalog", "lakehouse")
+      .config("spark.hadoop.fs.s3a.endpoint", "http://minio:9000")
+      .config("spark.hadoop.fs.s3a.access.key", "admin")
+      .config("spark.hadoop.fs.s3a.secret.key", "password")
+      .config("spark.hadoop.fs.s3a.path.style.access", "true")
+      .config("spark.hadoop.fs.s3a.connection.ssl.enabled", "false")
+      .config("spark.cassandra.connection.host", sys.env.getOrElse("CASSANDRA_HOST", "cassandra"))
+      .config("spark.cassandra.connection.port", sys.env.getOrElse("CASSANDRA_PORT", "9042"))
       .getOrCreate()
-    import spark.implicits._
-
-    //Load the arrival delay bucketizer
-    val base_path= "/Users/admin/Downloads/practica_creativa"
-    val arrivalBucketizerPath = "%s/models/arrival_bucketizer_2.0.bin".format(base_path)
-    print(arrivalBucketizerPath.toString())
-    val arrivalBucketizer = Bucketizer.load(arrivalBucketizerPath)
-    val columns= Seq("Carrier","Origin","Dest","Route")
-
-    //Load all the string field vectorizer pipelines into a dict
-    val stringIndexerModelPath =  columns.map(n=> ("%s/models/string_indexer_model_"
-      .format(base_path)+"%s.bin".format(n)).toSeq)
-    val stringIndexerModel = stringIndexerModelPath.map{n => StringIndexerModel.load(n.toString)}
-    val stringIndexerModels  = (columns zip stringIndexerModel).toMap
-
-    // Load the numeric vector assembler
-    val vectorAssemblerPath = "%s/models/numeric_vector_assembler.bin".format(base_path)
-    val vectorAssembler = VectorAssembler.load(vectorAssemblerPath)
-
-    // Load the classifier model
-    val randomForestModelPath = "%s/models/spark_random_forest_classifier.flight_delays.5.0.bin".format(
-      base_path)
-    val rfc = RandomForestClassificationModel.load(randomForestModelPath)
-
-    //Process Prediction Requests in Streaming
-    val df = spark
-      .readStream
-      .format("kafka")
-      .option("kafka.bootstrap.servers", "localhost:9092")
-      .option("subscribe", "flight-delay-ml-request")
-      .load()
-    df.printSchema()
-
-    val flightJsonDf = df.selectExpr("CAST(value AS STRING)")
-
-    val struct = new StructType()
-      .add("Origin", DataTypes.StringType)
-      .add("FlightNum", DataTypes.StringType)
-      .add("DayOfWeek", DataTypes.IntegerType)
-      .add("DayOfYear", DataTypes.IntegerType)
-      .add("DayOfMonth", DataTypes.IntegerType)
-      .add("Dest", DataTypes.StringType)
-      .add("DepDelay", DataTypes.DoubleType)
-      .add("Prediction", DataTypes.StringType)
-      .add("Timestamp", DataTypes.TimestampType)
-      .add("FlightDate", DataTypes.DateType)
-      .add("Carrier", DataTypes.StringType)
-      .add("UUID", DataTypes.StringType)
-      .add("Distance", DataTypes.DoubleType)
-      .add("Carrier_index", DataTypes.DoubleType)
-      .add("Origin_index", DataTypes.DoubleType)
-      .add("Dest_index", DataTypes.DoubleType)
-      .add("Route_index", DataTypes.DoubleType)
-
-    val flightNestedDf = flightJsonDf.select(from_json($"value", struct).as("flight"))
-    flightNestedDf.printSchema()
-
-    // DataFrame for Vectorizing string fields with the corresponding pipeline for that column
-    val flightFlattenedDf = flightNestedDf.selectExpr("flight.Origin",
-      "flight.DayOfWeek","flight.DayOfYear","flight.DayOfMonth","flight.Dest",
-      "flight.DepDelay","flight.Timestamp","flight.FlightDate",
-      "flight.Carrier","flight.UUID","flight.Distance")
-    flightFlattenedDf.printSchema()
-
-    val predictionRequestsWithRouteMod = flightFlattenedDf.withColumn(
-      "Route",
-                concat(
-                  flightFlattenedDf("Origin"),
-                  lit('-'),
-                  flightFlattenedDf("Dest")
-                )
-    )
-
-    // Dataframe for Vectorizing numeric columns
-    val flightFlattenedDf2 = flightNestedDf.selectExpr("flight.Origin",
-      "flight.DayOfWeek","flight.DayOfYear","flight.DayOfMonth","flight.Dest",
-      "flight.DepDelay","flight.Timestamp","flight.FlightDate",
-      "flight.Carrier","flight.UUID","flight.Distance",
-      "flight.Carrier_index","flight.Origin_index","flight.Dest_index","flight.Route_index")
-    flightFlattenedDf2.printSchema()
-
-    val predictionRequestsWithRouteMod2 = flightFlattenedDf2.withColumn(
-      "Route",
-      concat(
-        flightFlattenedDf2("Origin"),
-        lit('-'),
-        flightFlattenedDf2("Dest")
-      )
-    )
-
-    // Vectorize string fields with the corresponding pipeline for that column
-    // Turn category fields into categoric feature vectors, then drop intermediate fields
-    val predictionRequestsWithRoute = stringIndexerModel.map(n=>n.transform(predictionRequestsWithRouteMod))
-
-    //Vectorize numeric columns: DepDelay, Distance and index columns
-    val vectorizedFeatures = vectorAssembler.setHandleInvalid("keep").transform(predictionRequestsWithRouteMod2)
-
-    // Inspect the vectors
-    vectorizedFeatures.printSchema()
-
-    // Drop the individual index columns
-    val finalVectorizedFeatures = vectorizedFeatures
-        .drop("Carrier_index")
-        .drop("Origin_index")
-        .drop("Dest_index")
-        .drop("Route_index")
-
-    // Inspect the finalized features
-    finalVectorizedFeatures.printSchema()
-
-    // Make the prediction
-    val predictions = rfc.transform(finalVectorizedFeatures)
-      .drop("Features_vec")
-
-    // Drop the features vector and prediction metadata to give the original fields
-    val finalPredictions = predictions.drop("indices").drop("values").drop("rawPrediction").drop("probability")
-
-    // Inspect the output
-    finalPredictions.printSchema()
-
-    // define a streaming query
-    val dataStreamWriter = finalPredictions
-      .writeStream
-      .format("mongodb")
-      .option("spark.mongodb.connection.uri", "mongodb://127.0.0.1:27017")
-      .option("spark.mongodb.database", "agile_data_science")
-      .option("checkpointLocation", "/tmp")
-      .option("spark.mongodb.collection", "flight_delay_ml_response")
-      .outputMode("append")
-
-    // run the query
-    val query = dataStreamWriter.start()
-    // Console Output for predictions
-
-    val consoleOutput = finalPredictions.writeStream
-      .outputMode("append")
-      .format("console")
-      .start()
-    consoleOutput.awaitTermination()
   }
 
+  def main(args: Array[String]): Unit = {
+    println("Flight predictor starting...")
+
+    val spark = buildSpark()
+    spark.sparkContext.setLogLevel("WARN")
+    import spark.implicits._
+
+    val kafkaBootstrapServers = sys.env.getOrElse("KAFKA_BOOTSTRAP_SERVERS", "kafka:9092")
+    val requestTopic = sys.env.getOrElse("REQUEST_TOPIC", "flight-delay-ml-request")
+    val responseTopic = sys.env.getOrElse("RESPONSE_TOPIC", "flight-delay-ml-response")
+    val modelPath = sys.env.getOrElse("MODEL_PATH", "s3a://warehouse/artifacts/models/rfc_flight_delays")
+
+    val hconf = spark.sparkContext.hadoopConfiguration
+    hconf.set("fs.s3a.endpoint", "http://minio:9000")
+    hconf.set("fs.s3a.access.key", "admin")
+    hconf.set("fs.s3a.secret.key", "password")
+    hconf.set("fs.s3a.path.style.access", "true")
+    hconf.set("fs.s3a.connection.ssl.enabled", "false")
+
+    val trainingDf = spark.table("lakehouse.training_data.flight_delay_features")
+      .select(
+        "Carrier", "Origin", "Dest", "ArrDelay", "DepDelay",
+        "DayOfMonth", "DayOfWeek", "DayOfYear", "Distance", "FlightDate", "FlightNum"
+      )
+      .withColumn("Route", concat(col("Origin"), lit("-"), col("Dest")))
+
+    val carrierIndexer = new StringIndexer()
+      .setInputCol("Carrier")
+      .setOutputCol("Carrier_index")
+      .setHandleInvalid("keep")
+      .fit(trainingDf)
+
+    val originIndexer = new StringIndexer()
+      .setInputCol("Origin")
+      .setOutputCol("Origin_index")
+      .setHandleInvalid("keep")
+      .fit(trainingDf)
+
+    val destIndexer = new StringIndexer()
+      .setInputCol("Dest")
+      .setOutputCol("Dest_index")
+      .setHandleInvalid("keep")
+      .fit(trainingDf)
+
+    val routeIndexer = new StringIndexer()
+      .setInputCol("Route")
+      .setOutputCol("Route_index")
+      .setHandleInvalid("keep")
+      .fit(trainingDf)
+
+    val vectorAssembler = new VectorAssembler()
+      .setInputCols(Array(
+        "DepDelay", "Distance", "DayOfMonth", "DayOfWeek", "DayOfYear",
+        "Carrier_index", "Origin_index", "Dest_index", "Route_index"
+      ))
+      .setOutputCol("Features_vec")
+      .setHandleInvalid("keep")
+
+    val rfc = RandomForestClassificationModel.load(modelPath)
+
+    val requestSchema = new StructType()
+      .add("Origin", StringType)
+      .add("FlightNum", StringType)
+      .add("DayOfWeek", IntegerType)
+      .add("DayOfYear", IntegerType)
+      .add("DayOfMonth", IntegerType)
+      .add("Dest", StringType)
+      .add("DepDelay", DoubleType)
+      .add("Timestamp", TimestampType)
+      .add("FlightDate", DateType)
+      .add("Carrier", StringType)
+      .add("UUID", StringType)
+      .add("Distance", DoubleType)
+
+    val requests = spark.readStream
+      .format("kafka")
+      .option("kafka.bootstrap.servers", kafkaBootstrapServers)
+      .option("subscribe", requestTopic)
+      .option("startingOffsets", "latest")
+      .option("failOnDataLoss", "false")
+      .load()
+
+    val parsed = requests
+      .selectExpr("CAST(value AS STRING) AS json")
+      .select(from_json(col("json"), requestSchema).as("flight"))
+      .select("flight.*")
+      .withColumn("Route", concat(col("Origin"), lit("-"), col("Dest")))
+      .withColumn("FlightDate", to_date(col("FlightDate")))
+      .withColumn("DayOfMonth", coalesce(col("DayOfMonth"), dayofmonth(col("FlightDate"))))
+      .withColumn("DayOfYear", coalesce(col("DayOfYear"), dayofyear(col("FlightDate"))))
+      .withColumn("DayOfWeek", coalesce(col("DayOfWeek"), dayofweek(col("FlightDate"))))
+      .withColumn("Timestamp", coalesce(col("Timestamp"), current_timestamp()))
+
+    val indexedCarrier = carrierIndexer.transform(parsed)
+    val indexedOrigin = originIndexer.transform(indexedCarrier)
+    val indexedDest = destIndexer.transform(indexedOrigin)
+    val indexedRoute = routeIndexer.transform(indexedDest)
+
+    val features = vectorAssembler.transform(indexedRoute)
+
+    val scored = rfc.transform(features)
+
+    val responses = scored.select(
+      col("UUID"),
+      col("Origin"),
+      col("Dest"),
+      col("Carrier"),
+      col("FlightNum"),
+      col("DepDelay"),
+      col("Distance"),
+      col("DayOfWeek"),
+      col("DayOfMonth"),
+      col("DayOfYear"),
+      col("Timestamp"),
+      col("prediction").cast("int").as("Prediction")
+    ).withColumn(
+      "value",
+      to_json(struct(
+        col("UUID"),
+        col("Origin"),
+        col("Dest"),
+        col("Carrier"),
+        col("FlightNum"),
+        col("DepDelay"),
+        col("Distance"),
+        col("DayOfWeek"),
+        col("DayOfMonth"),
+        col("DayOfYear"),
+        col("Timestamp"),
+        col("Prediction")
+      ))
+    ).selectExpr("CAST(NULL AS STRING) AS key", "CAST(value AS STRING) AS value")
+
+    val responseDf = scored.select(
+      col("UUID").as("uuid"),
+      col("Origin").as("origin"),
+      col("Dest").as("dest"),
+      col("Carrier").as("carrier"),
+      col("FlightNum").as("flightnum"),
+      col("DepDelay").as("depdelay"),
+      col("Distance").as("distance"),
+      col("DayOfWeek").as("dayofweek"),
+      col("DayOfMonth").as("dayofmonth"),
+      col("DayOfYear").as("dayofyear"),
+      col("Timestamp").as("timestamp"),
+      col("prediction").cast("int").as("prediction")
+    )
+
+    val kafkaQuery = responses.writeStream
+      .format("kafka")
+      .option("kafka.bootstrap.servers", kafkaBootstrapServers)
+      .option("topic", responseTopic)
+      .option("checkpointLocation", "/tmp/checkpoints/make_prediction_kafka")
+      .outputMode("append")
+      .trigger(Trigger.ProcessingTime("2 seconds"))
+      .start()
+
+    val cassandraQuery = responseDf.writeStream
+      .foreachBatch { (batchDF: DataFrame, batchId: Long) =>
+        batchDF
+          .write
+          .format("org.apache.spark.sql.cassandra")
+          .option("keyspace", "agile_data_science")
+          .option("table", "flight_delay_ml_results")
+          .mode("append")
+          .save()
+      }
+      .outputMode("append")
+      .option("checkpointLocation", "/tmp/checkpoints/make_prediction_cassandra")
+      .trigger(Trigger.ProcessingTime("2 seconds"))
+      .start()
+    
+    spark.streams.awaitAnyTermination()
+  }
 }

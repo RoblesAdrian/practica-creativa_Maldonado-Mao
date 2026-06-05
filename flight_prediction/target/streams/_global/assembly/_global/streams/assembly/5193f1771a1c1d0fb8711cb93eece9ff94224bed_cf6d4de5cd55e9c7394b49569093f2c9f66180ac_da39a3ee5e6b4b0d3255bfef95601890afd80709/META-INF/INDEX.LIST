@@ -1,0 +1,15 @@
+JarIndex-Version: 1.0
+
+netty-handler-ssl-ocsp-4.2.7.Final.jar
+META-INF
+META-INF/maven
+META-INF/maven/io.netty
+META-INF/maven/io.netty/netty-handler-ssl-ocsp
+META-INF/versions
+META-INF/versions/11
+io
+io/netty
+io/netty/handler
+io/netty/handler/ssl
+io/netty/handler/ssl/ocsp
+
